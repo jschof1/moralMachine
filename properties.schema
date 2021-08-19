@@ -1,22 +1,8 @@
 {
-    "_id" : ObjectId("611e577805f259056a19815c"),
-    "_isDeleted" : false,
-    "_isAvailableInEditor" : true,
-    "_isAddedByDefault" : false,
-    "isLocalPackage" : true,
-    "targetAttribute" : "undefined",
-    "assetFields" : [ 
-        "_images", 
-        "_images.small", 
-        "_images.large"
-    ],
-    "name" : "moralMachine",
-    "displayName" : "Moral Machine",
-    "description" : "Moral Machine game based on MIT Moral Machine",
-    "version" : "0.0.5",
-    "framework" : ">=5.0",
-    "homepage" : null,
-    "issues" : null,
+    "type":"object",
+    "$schema":"http://json-schema.org/draft-04/schema",
+    "id":"http://jsonschema.net",
+    "$ref":"http://localhost/plugins/content/component/model.schema",
     "properties" : {
         "_supportedLayout" : {
             "type" : "string",
@@ -517,7 +503,5 @@
             "validators" : [],
             "translatable" : true
         }
-    },
-    "component" : "moralMachine",
-    "__v" : 0
+    }
 }
