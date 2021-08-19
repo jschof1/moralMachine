@@ -1,0 +1,34 @@
+{
+  "name": "moralMachine",
+  "authors": [
+    "Dave T",
+    "Jack Schofield <jack.schofield@theodi.com>"
+  ],
+  "description": "Moral Machine game based on MIT Moral Machine",
+  "main": "js/moralMachine.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "assetFields" : [
+    "_images",
+    "_images.small",
+    "_images.large"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/plugins",
+    "test",
+    "tests"
+  ],
+    "version": "0.0.1",
+    "framework": ">=5.0",
+    "component": "moralMachine",
+    "displayName": "Moral Machine"
+  }
+

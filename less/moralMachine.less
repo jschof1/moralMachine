@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono&display=swap');
+
+body {
+	font-family: helvetica;
+	font-weight: 100;
+	border: 0px;
+	margin: 0px;
+	text-align: center;
+}
+
+.background {
+	width: 333px;
+	height: 500px;
+	display: inline-block;
+	background-size: contain;
+	margin-right: 00px;
+}
+.top-corner{
+cursor: pointer;
+}
+#background-left:hover, #background-right:hover {
+  	box-shadow: 0 0 20px rgba(28,95,159,256); 
+}
+
+#background-right {
+	margin-left: 10em;
+}
+
+.credits {
+    margin-left: auto;
+    margin-right: auto;
+	font-size: 0.8em;
+	color: black;
+	vertical-align: top;
+	position: relative;
+    top: -10px;
+}
+.credits a {
+	color: inherit;
+}
+@media only screen and (max-width: 700px) {
+	#background-right {
+		margin-left: 0em;
+		margin-top: 10px;
+	}
+	.credits {
+		position: relative;
+    	top: 10px;
+	}
+}
+@media only screen and (max-width: 1000px) {
+	container {
+		width: calc(666px + 1em);;
+	}
+	.panel {
+    	width: calc(666px - 0.5em);
+    	margin-bottom: 0.2em;
+    	margin-top: 0em;
+    }
+    .table {
+    	margin-left: 50px;
+    	margin-right: none;
+    }
+}
+.charecters {
+	border: 1px solid gray;
+	border-radius: 2px;
+	max-width: 40%;
+	vertical-align: top;
+    height: 130px;
+    padding: 6px;
+}
+.charecters h1 {
+	font-size: 1.3em;
+	padding: 0;
+	margin: 0.4em;
+}
+.charecters .charecter {
+	transform: scale(0.7, 0.7);
+	-ms-transform: scale(0.7, 0.7);
+	-webkit-transform: scale(0.7, 0.7);
+	transform-origin: bottom left;
+	position: relative;
+	bottom: 45px;
+	display: none;
+}
+.left {
+	background-image: url('../../../course/en/assets/moralMachine/L.png');
+}
+.right {
+	background-image: url('../../../course/en/assets/moralMachine/L.png');
+}
+.background img {
+	width: 333px;
+	height: 500px;
+	cursor: pointer;
+}
+#results {
+	max-width: 100%;
+	min-width: 400px;
+	display: none;
+}
+#results sub-section, #results sub-section panel {
+	display: inline-block;
+}
+.left-50 {
+	margin-top: 1.5em;
+	width: 45%;
+	display: inline-block;
+	vertical-align: top;
+}
+.right-50 {
+	margin-top: 1.5em;
+	width: 45%;
+	display: inline-block;
+	vertical-align: top;
+}
+.padding {
+	display: inline-block;
+	width: 20px;
+}
+#results sub-section panel img {
+	display: inline;
+}
+h1 {
+	font-weight: 100;
+}
+.left-50 h1, .right-50 h1 {
+	margin: 0;
+	margin-bottom: -40px;
+	font-size: 1em;
+	margin-top: 1em;
+	font-weight: 100;
+}
+left, right, result {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle; 
+}
+left {
+	padding-right: 1em;
+}
+right {
+	padding-left: 1em;
+}
+result {
+	min-width: 290px;
+	width: 100%;
+	vertical-align: top;
+}
+result #slider {
+	border-top: 7px solid gray;
+}
+result #middle, result #left, result #right {
+    width: 5px;
+    height: 20px;
+    background-color: gray;
+    position: relative;
+}
+result #middle {
+	margin-left: 50%;
+	top: -13px;
+}
+result #left {
+	top: 13px;
+}
+result #right {
+	margin-left: 100%;
+	top: -33px;
+}
+result #you {
+    position: relative;
+    top: 53px;
+    text-align: center;
+    left: -0.6em;
+    max-width: fit-content;
+    z-index: 10;
+}
+result #you-bar {
+	width: 5px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: orange;
+    border: 1px solid gray;
+}
+
+result #everyone {
+	position: relative;
+    top: 53px;
+    text-align: center;
+    left: -0.1em;
+    max-width: fit-content;
+    z-index: 10;
+}
+
+result #everyone-bar {
+	float: left;
+	width: 49%;
+	width: 5px;
+	height: 20px;
+	margin-left: auto;
+	margin-right: 80px;
+	background-color: green;
+	border: 1px solid gray;
+
+}
+#everyone-btn {
+	box-shadow: -1px 0px 5px 0px #070807;
+	background-color:transparent;
+	border:3px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#0a000a;
+	font-family:Arial;
+	font-size:15px;
+	padding:16px 17px;
+	text-decoration:none;
+	margin: 15px;
+}
+#everyone-btn:hover {
+	background-color:transparent;
+}
+#everyone-btn:active {
+	position:relative;
+	top:1px;
+}
+
+@media only screen and (max-width: 950px) {
+	.left-50, .right-50 {
+		display: block;
+    	margin-left: auto;
+    	margin-right: auto;
+    	width: auto;
+    }
+}
+@media only screen and (max-width: 650px) {
+	.charecters h1 {
+		font-size: 1em;
+	}
+}
+
+
+body {
+    zoom: 98%;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 35px;
+}
+
+.medium {
+    font-size: 24px;
+    line-height: 2;
+}
+
+.small {
+    font-size: 20px
+}
+
+hr.new5 {
+    border: 10px solid black !important;  
+}
+
+/* img {
+    height: 105%
+} */
+.top-text {
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.choices {
+    text-align: center;
+    font-family: PT Sans, sans-serif;
+    padding: 15px;
+}
+
+.intervention {
+    font-size: 28px;
+}
+
+.targets {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.top-corner {
+	font-size: 20px;
+    position:absolute;
+    top:0px;
+    right: 10px
+ }
+
+
+ .custom-html {
+    display: block;
+    margin-top: 15px;
+}
+
+.background {
+    position: relative;
+    margin-top: 70px;
+}
+
+.custom-text-bottom,.custom-text-top {
+	margin-top: 50px;
+	padding-inline: 180px;
+	font-size: 20px;
+}
+
+.custom-top-title {
+    display: block;
+    position: absolute;
+    top: -55px;
+    width: 100%;
+    font-size: 25px;
+}
+
