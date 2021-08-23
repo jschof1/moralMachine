@@ -116,7 +116,7 @@
                                     }
                                 }
                             },
-                            "killed charecters" : {
+                            "killed characters" : {
                                 "type" : "array",
                                 "required" : true,
                                 "title" : "Killed characters",
@@ -309,7 +309,7 @@
                                     }
                                 }
                             },
-                            "killed charecters" : {
+                            "killed characters" : {
                                 "type" : "array",
                                 "required" : true,
                                 "title" : "Killed characters",

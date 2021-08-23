@@ -4,64 +4,99 @@ define([
 
   const MoralMachineView = QuestionView.extend({
 
+
+  
     resetQuestionOnRevisit: function() {
       this.resetQuestion();
     },
 
     onQuestionRendered: function() {
-      this.enableSwapping();
-      this.setReadyStatus();
-			this.nextScenario()
+			this.getAsset()
     },
 
-    postRender: function() {
-    // create empty object which contains the genders and characters killed and saved
-      const scores = {};
-      scores.Saved = {};
-      scores.Saved.genders = {};
-      scores.Saved.characters = {};
-      scores.Killed = {};
-      scores.Killed.genders = {};
-      scores.Killed.characters = {};
+    
+    getAssets: function() {
+      let scenario = this.model.get('scenario');
+      console.log(scenario);
+
+      var graphicLeft = scenario[0]["scenario-left"]["_graphic"];
+      var descriptionLeft = scenario[0]["scenario-left"]["description"]
+      var scoreLeft = scenario[0]["scenario-left"]["scoring"]
+      var savedCharactersLeft = scenario[0]["scenario-left"]["saved characters"]
+      var killedCharactersLeft = scenario[0]["scenario-left"]["killed characters"]
+
+      var graphicRight = scenario[0]["scenario-right"]["_graphic"];
+      var descriptionRight = scenario[0]["scenario-right"]["description"]
+      var scoreRight = scenario[0]["scenario-right"]["scoring"]
+      var savedCharactersRight = scenario[0]["scenario-right"]["saved characters"]
+      var killedCharactersRight = scenario[0]["scenario-right"]["killed characters"]
+      
+      console.log("graphicLeft: " + graphicLeft);
+      console.log("graphicRight: " + graphicRight);
     },
 
-    // count the number of characters and genders killed and saved
-
-    setResultsObject: function() {
-      const counts = {};
-      counts.genders = {};
-      counts.characters = {};
+    enableSwapping: function () {
+      var _self = this;
+      this.model.on('change:scenario', function (model, scenario) {
+        _self.render();
+      }, this);
+      _self.enableSwapping(this);
     },
 
-    resetQuestionOnRevisit: function() {
-      this.resetQuestion();
-    },
+  });
 
-    resetQuestion: function() {
-			this.setFirstImage(0);
-    },
+    return MoralMachineView;
+  
+  });
+  
+    // postRender: function() {
+    // // create empty object which contains the genders and characters killed and saved
+    //   const scores = {};
+    //   scores.Saved = {};
+    //   scores.Saved.genders = {};
+    //   scores.Saved.characters = {};
+    //   scores.Killed = {};
+    //   scores.Killed.genders = {};
+    //   scores.Killed.characters = {};
+    // },
 
-    setFirstImage: function(id) {
+    // // count the number of characters and genders killed and saved
 
-      var scenario = this.model.get("scenarios");
-      var graphicLeft = scenario[id]["left"]["_graphic"]["large"];
-			var graphicRight = scenario[id]["right"]["_graphic"]["large"];
+    // setResultsObject: function() {
+    //   const counts = {};
+    //   counts.genders = {};
+    //   counts.characters = {};
+    // },
 
-			$('#background-left').html(`<img id="left" src=${graphicLeft}/>`);
-      $('#background-right').html(`<img id="right" src=${graphicRight}/>`);
-    },
+    // resetQuestionOnRevisit: function() {
+    //   this.resetQuestion();
+    // },
 
-		setOrder: function() {
-			function insertId(side){
-        $(side).on('click', function() {
-        $('#background-left').children().fadeOut(function() {
-          this.remove();
-        })
-        $('#background-right').fadeOut(1000);
-        $('#background-left').fadeIn(1000);
-        $('#background-right').fadeIn(1000); 
-      });
-    }}
+    // resetQuestion: function() {
+		// 	this.setFirstImage(0);
+    // },
+
+    // setFirstImage: function(id) {
+
+    //   var scenario = this.model.get("scenario");
+    //   var graphicLeft = scenario[id]["left"]["_graphic"]["large"];
+		// 	var graphicRight = scenario[id]["right"]["_graphic"]["large"];
+
+		// 	$('#background-left').html(`<img id="left" src=${graphicLeft}/>`);
+    //   $('#background-right').html(`<img id="right" src=${graphicRight}/>`);
+    // },
+
+		// setOrder: function() {
+		// 	function insertId(side){
+    //     $(side).on('click', function() {
+    //     $('#background-left').children().fadeOut(function() {
+    //       this.remove();
+    //     })
+    //     $('#background-right').fadeOut(1000);
+    //     $('#background-left').fadeIn(1000);
+    //     $('#background-right').fadeIn(1000); 
+    //   });
+    // }}
 
     // nextScenario: function(id) {
     //   // get JSON data
@@ -137,8 +172,3 @@ define([
     //   });
     // }
 
-  })
-
-  return MoralMachineView;
-
-});

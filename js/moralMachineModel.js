@@ -3,6 +3,53 @@ define([
 ], function(QuestionModel) {
 
   var MoralMachineModel = QuestionModel.extend({
+    
+        init: function() {
+          QuestionModel.prototype.init.call(this);
+        },
+    
+
+      imagesImport: function() {
+        this.set(this.get('scenario'));
+    },
+  
+        canSubmit: function() {
+          return true;
+        },
+    
+        isCorrect: function() {
+          return(this.get('_isCorrect'));
+        },
+    
+        setupCorrectFeedback() {
+          var context = { "stepCount": this.get("_stepCount") };
+          this.set({
+            feedbackTitle: this.getFeedbackTitle(),
+            feedbackMessage: Handlebars.compile(this.get('_feedback').correct)(context)
+          });
+        },
+    
+        setAttemptSpecificFeedback(feedback) {
+    
+          this.set({
+            feedbackTitle: this.getFeedbackTitle(),
+            feedbackMessage: Handlebars.compile(body)(context)
+          });
+        }
+    
+
+      });
+      return MoralMachineModel;
+      
+    });
+    
+
+
+
+
+
+
+
 
     // updateCounts: function(id) {
     //   d3.json('../data.json', function(data) {
@@ -155,7 +202,7 @@ define([
 // 			agePref = agePref * 100;
 // 			return agePref;
 // 		},
-		
+    
 // 		getSpeciesPeference: function() {
 // 			//console.log("Species");
 // 			//console.log("Save pets: " + scores["Save pets"] + " " + getScoringPercentage(scores["Save pets"],counts["Save pets"]));
@@ -166,7 +213,7 @@ define([
 // 			agePref = agePref * 100;
 // 			return agePref;
 // 		},
-		
+    
 // 		getSocialPeference: function() {
 // 			//console.log("Species");
 // 			//console.log("Save pets: " + scores["Save pets"] + " " + getScoringPercentage(scores["Save pets"],counts["Save pets"]));
@@ -177,7 +224,7 @@ define([
 // 			agePref = agePref * 100;
 // 			return agePref;
 // 		},
-		
+    
 // 		getMostSKCharacter: function(sk,counts) {
 // 			var highcount = 0.0;
 // 			var highkey = [];
@@ -196,7 +243,7 @@ define([
 // 				"percent": highcount
 // 			};
 // 		},
-		
+    
 // 		renderSKCharecters: function(element,characters,percent) {
 // 			$.each(characters, function(key,value) {
 // 				value = value.replace(" ","_");
@@ -205,7 +252,7 @@ define([
 // 				$('#'+element+ ' #'+value).show();
 // 			});
 // 		},
-		
+    
 // 		getPreference: function(sk,counts) {
 // 			var highcount = 0.0;
 // 			var highkey = {};
@@ -216,9 +263,9 @@ define([
 // 			});
 // 			return highkey;
 // 		},
-	
+  
 // 		getScoringPercentage: function(count, total) {
-			
+      
 // 			var temporaryVal = (count / total) * 100;
 // 			if(globalResult.indexOf(temporaryVal) !== -1){
 // 						//Do Nothing
@@ -228,9 +275,9 @@ define([
 // 				}
 // 			globalResult[globalResultCounter] = temporaryVal;
 // 			globalResultCounter = globalResultCounter+1;
-				
+        
 // 			console.log((count / total) * 100);
-			
+      
 // 			if (!count) {
 // 				return 0;
 // 			}
@@ -296,8 +343,3 @@ define([
 // 			}},
 
 // });
-  });
-  return MoralMachineModel;
-
-});
- 
