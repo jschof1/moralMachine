@@ -45,7 +45,7 @@ define([
       },
 
       setFirst : function () {
-        setScenarios()
+        this.setScenarios()
         getAssets();
 
         desc.text(descriptionLeft);
@@ -55,14 +55,15 @@ define([
       },
 
       setScenarios : function () {
-        const desc
-        const leftImgEl
-        const rightImgEl
+        const desc = $(".description");
+        const leftImgEl = $("#scenario-left"); 
+        const rightImgEl = $("#scenario-right");
     
   
-        desc = $(".description");
-        leftImgEl = $("#scenario-left");
-        rightImgEl = $("#scenario-right");
+        
+        
+
+       
       },
 
       clickEvent : function () {
