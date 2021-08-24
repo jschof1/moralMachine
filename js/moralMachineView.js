@@ -32,7 +32,6 @@ define([
       const desc
       const leftImgEl
       const rightImgEl
-  
 
       desc = $(".description");
       leftImgEl = $("#scenario-left");
