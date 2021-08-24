@@ -4,42 +4,97 @@ define([
 
   const MoralMachineView = QuestionView.extend({
 
+    postRender: function() {
+      this.setReadyStatus();
+      this.setupInviewCompletion();
+  },
 
-  
-    resetQuestionOnRevisit: function() {
+    resetQuestionOnRevisit : function () {
       this.resetQuestion();
     },
 
-    onQuestionRendered: function() {
-			this.getAsset()
+    onQuestionRendered : function () {
+			this.getAssets();
+      this.storeResults();
     },
 
-    
-    getAssets: function() {
-      let scenario = this.model.get('scenario');
-      console.log(scenario);
+    setFirst : function () {
+      setScenarios()
 
-      var graphicLeft = scenario[0]["scenario-left"]["_graphic"];
-      var descriptionLeft = scenario[0]["scenario-left"]["description"]
+      getAssets();
+      desc.text(descriptionLeft);
+
+      leftImgEl.attr("src", graphicLeft);
+      rightImgEl.attr("src", graphicRight);
+    },
+    
+    setScenarios : function () {
+      const desc
+      const leftImgEl
+      const rightImgEl
+  
+
+      desc = $(".description");
+      leftImgEl = $("#scenario-left");
+      rightImgEl = $("#scenario-right");
+    },
+
+    getAssets : function() {
+      let scenario = this.model.get('scenario');
+
+      // console.log(scenario);
+      // console.log(scenario[0]['scenario-left']['direction'][0]['Direction type']);
+      // console.log(scenario[0]['scenario-left']['scoring'][0]['choices']);
+      // console.log(scenario[0]['scenario-right']['direction'][0]['Direction type']);
+      // console.log(scenario[0]['scenario-right']['scoring'][0]['choices']);
+    
+      //left side
+      var graphicLeft = scenario[0]["scenario-left"]["_graphic"]
+      var descriptionLeft = scenario[0]["scenario-left"]["description"][0]
       var scoreLeft = scenario[0]["scenario-left"]["scoring"]
+
       var savedCharactersLeft = scenario[0]["scenario-left"]["saved characters"]
+
       var killedCharactersLeft = scenario[0]["scenario-left"]["killed characters"]
 
       var graphicRight = scenario[0]["scenario-right"]["_graphic"];
-      var descriptionRight = scenario[0]["scenario-right"]["description"]
-      var scoreRight = scenario[0]["scenario-right"]["scoring"]
-      var savedCharactersRight = scenario[0]["scenario-right"]["saved characters"]
-      var killedCharactersRight = scenario[0]["scenario-right"]["killed characters"]
+      var descriptionRight = scenario[0]["scenario-right"]["description"];
+      var scoreRight = scenario[0]["scenario-right"]["scoring"];
+      var savedCharactersRight = scenario[0]["scenario-right"]["saved characters"];
+      var killedCharactersRight = scenario[0]["scenario-right"]["killed characters"];
       
       console.log("graphicLeft: " + graphicLeft);
       console.log("graphicRight: " + graphicRight);
     },
 
+    clickEvent : function () {
+      let i 
+      this.getAssets()
+      if (i < scenario.length) {
+        $('#scenario-left, #scenario-right').on("click", function () {
+
+          desc.text(scenario[++f][2]);
+          
+          leftImgEl.attr("src", objToArr[++j][0]);
+          rightImgEl.attr("src", objToArr[++x][1]);
+
+          leftImgEl.attr("scenario", ++y)
+          rightImgEl.attr("scenario", ++y)
+
+        });
+      } else if (i == objToArr.length) {
+        console.log("done");
+      }
+    },
+
+    storeResults : function() {
+      let results = this.model.get('storageObject')
+      console.log(results);
+  
+    },
+
     enableSwapping: function () {
       var _self = this;
-      this.model.on('change:scenario', function (model, scenario) {
-        _self.render();
-      }, this);
       _self.enableSwapping(this);
     },
 

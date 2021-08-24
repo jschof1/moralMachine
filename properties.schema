@@ -56,7 +56,36 @@
                                 "default" : "Click on either picture to submit your choice.",
                                 "help" : "The scenario description"
                             },
-                            "saved charecters" : {
+                              "direction" : {
+                                "type" : "array",
+                                "required" : true,
+                                "title" : "Direction",
+                                "items" : {
+                                    "type" : "object",
+                                    "required" : true,
+                                    "properties" : {
+                                    "Direction type" : {
+                                        "type" : "string",
+                                        "required" : true,
+                                        "enum" : [
+                                            "go straight",
+                                            "swerve"
+                                        ],
+                                        "default" : "go straight",
+                                        "inputType" : {
+                                        "type" : "Select",
+                                        "options" : [
+                                            "go straight",
+                                            "swerve"
+                                            ]
+                                        },
+                                        "validators" : [],
+                                        "help" : "The direction type"
+                                    }
+                                }
+                                }
+                           },
+                            "saved characters" : {
                                 "type" : "array",
                                 "required" : true,
                                 "title" : "Saved characters",
@@ -64,7 +93,7 @@
                                     "type" : "object",
                                     "required" : true,
                                     "properties" : {
-                                        "charecter" : {
+                                        "character" : {
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
@@ -99,7 +128,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         },
                                         "number" : {
                                             "type" : "number",
@@ -111,7 +140,7 @@
                                                 "required", 
                                                 "number"
                                             ],
-                                            "help" : "How many of this charecter are saved?"
+                                            "help" : "How many of this character are saved?"
                                         }
                                     }
                                 }
@@ -124,7 +153,7 @@
                                     "type" : "object",
                                     "required" : true,
                                     "properties" : {
-                                        "charecter" : {
+                                        "character" : {
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
@@ -159,7 +188,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         },
                                         "number" : {
                                             "type" : "number",
@@ -171,7 +200,7 @@
                                                 "required", 
                                                 "number"
                                             ],
-                                            "help" : "How many of this charecter are saved?"
+                                            "help" : "How many of this character are saved?"
                                         }
                                     }
                                 }
@@ -189,7 +218,7 @@
                                             "required" : false,
                                             "enum" : [ 
                                                 "", 
-                                                "Avoid intervention", 
+ 
                                                 "Save people in car", 
                                                 "Save old", 
                                                 "Save young", 
@@ -206,7 +235,7 @@
                                                 "type" : "Select",
                                                 "options" : [ 
                                                     "", 
-                                                    "Avoid intervention", 
+     
                                                     "Save people in car", 
                                                     "Save old", 
                                                     "Save young", 
@@ -219,7 +248,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         }
                                     }
                                 }
@@ -249,7 +278,36 @@
                                 "default" : "Click on either picture to submit your choice.",
                                 "help" : "The scenario description"
                             },
-                            "saved charecters" : {
+                           "direction" : {
+                                "type" : "array",
+                                "required" : true,
+                                "title" : "Direction",
+                                "items" : {
+                                    "type" : "object",
+                                    "required" : true,
+                                    "properties" : {
+                                    "Direction type" : {
+                                        "type" : "string",
+                                        "required" : true,
+                                        "enum" : [
+                                            "go straight",
+                                            "swerve"
+                                        ],
+                                        "default" : "go straight",
+                                        "inputType" : {
+                                        "type" : "Select",
+                                        "options" : [
+                                            "go straight",
+                                            "swerve"
+                                            ]
+                                        },
+                                        "validators" : [],
+                                        "help" : "The direction type"
+                                    }
+                                }
+                                }
+                           },
+                            "saved characters" : {
                                 "type" : "array",
                                 "required" : true,
                                 "title" : "Saved characters",
@@ -257,7 +315,7 @@
                                     "type" : "object",
                                     "required" : true,
                                     "properties" : {
-                                        "charecter" : {
+                                        "character" : {
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
@@ -292,7 +350,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         },
                                         "number" : {
                                             "type" : "number",
@@ -304,7 +362,7 @@
                                                 "required", 
                                                 "number"
                                             ],
-                                            "help" : "How many of this charecter are saved?"
+                                            "help" : "How many of this character are saved?"
                                         }
                                     }
                                 }
@@ -317,7 +375,7 @@
                                     "type" : "object",
                                     "required" : true,
                                     "properties" : {
-                                        "charecter" : {
+                                        "character" : {
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
@@ -352,7 +410,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         },
                                         "number" : {
                                             "type" : "number",
@@ -364,7 +422,7 @@
                                                 "required", 
                                                 "number"
                                             ],
-                                            "help" : "How many of this charecter are saved?"
+                                            "help" : "How many of this character are saved?"
                                         }
                                     }
                                 }
@@ -382,7 +440,6 @@
                                             "required" : false,
                                             "enum" : [ 
                                                 "", 
-                                                "Avoid intervention", 
                                                 "Save people in car", 
                                                 "Save old", 
                                                 "Save young", 
@@ -398,8 +455,7 @@
                                             "inputType" : {
                                                 "type" : "Select",
                                                 "options" : [ 
-                                                    "", 
-                                                    "Avoid intervention", 
+                                                    "",
                                                     "Save people in car", 
                                                     "Save old", 
                                                     "Save young", 
@@ -412,7 +468,7 @@
                                                 ]
                                             },
                                             "validators" : [],
-                                            "help" : "Select the type of charecter saved."
+                                            "help" : "Select the type of character saved."
                                         }
                                     }
                                 }

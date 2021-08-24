@@ -10,11 +10,6 @@
     "adapt-plugin",
     "adapt-component"
   ],
-  "assetFields" : [
-    "_images",
-    "_images.small",
-    "_images.large"
-  ],
   "license": "MIT",
   "homepage": "",
   "private": true,

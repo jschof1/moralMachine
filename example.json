@@ -4,5 +4,171 @@
         "_type": "component",
         "_component": "blank",
         "_classes": "",
-        "_isOptional": true
-    }
+        "_isOptional": true,
+        "scenario": [
+            {
+              "id": "",
+              "scenario-left": {
+                "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
+                "description": "Click on either picture to submit your choice.",
+                "direction": [
+                  {
+                    "Direction type": "go straight"
+                  }
+                ],
+                "saved characters": [
+                  {
+                    "character": "Female (child)",
+                    "number": 3
+                  }
+                ],
+                "killed characters": [
+                  {
+                    "character": "Male (adult)",
+                    "number": 1
+                  }
+                ],
+                "scoring": [
+                  {
+                    "choices": "Save more people"
+                  }
+                ]
+              },
+              "scenario-right": {
+                "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
+                "description": "Click on either picture to submit your choice.",
+                "direction": [
+                  {
+                    "Direction type": "swerve"
+                  }
+                ],
+                "saved characters": [
+                  {
+                    "character": "Female (professional e.g. doctor)",
+                    "number": 1
+                  }
+                ],
+                "killed characters": [
+                  {
+                    "character": "Robber",
+                    "number": 1
+                  }
+                ],
+                "scoring": [
+                  {
+                    "choices": "Save robbers"
+                  }
+                ]
+              }
+            },
+            {
+                "id": "",
+                "scenario-left": {
+                  "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
+                  "description": "Click on either picture to submit your choice.",
+                  "direction": [
+                    {
+                      "Direction type": "go straight"
+                    }
+                  ],
+                  "saved characters": [
+                    {
+                      "character": "Female (child)",
+                      "number": 3
+                    }
+                  ],
+                  "killed characters": [
+                    {
+                      "character": "Male (adult)",
+                      "number": 1
+                    }
+                  ],
+                  "scoring": [
+                    {
+                      "choices": "Save more people"
+                    }
+                  ]
+                },
+                "scenario-right": {
+                  "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
+                  "description": "Click on either picture to submit your choice.",
+                  "direction": [
+                    {
+                      "Direction type": "swerve"
+                    }
+                  ],
+                  "saved characters": [
+                    {
+                      "character": "Female (professional e.g. doctor)",
+                      "number": 1
+                    }
+                  ],
+                  "killed characters": [
+                    {
+                      "character": "Robber",
+                      "number": 1
+                    }
+                  ],
+                  "scoring": [
+                    {
+                      "choices": "Save robbers"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "",
+                "scenario-left": {
+                  "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
+                  "description": "Click on either picture to submit your choice.",
+                  "direction": [
+                    {
+                      "Direction type": "go straight"
+                    }
+                  ],
+                  "saved characters": [
+                    {
+                      "character": "Female (child)",
+                      "number": 3
+                    }
+                  ],
+                  "killed characters": [
+                    {
+                      "character": "Male (adult)",
+                      "number": 1
+                    }
+                  ],
+                  "scoring": [
+                    {
+                      "choices": "Save more people"
+                    }
+                  ]
+                },
+                "scenario-right": {
+                  "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
+                  "description": "Click on either picture to submit your choice.",
+                  "direction": [
+                    {
+                      "Direction type": "swerve"
+                    }
+                  ],
+                  "saved characters": [
+                    {
+                      "character": "Female (professional e.g. doctor)",
+                      "number": 1
+                    }
+                  ],
+                  "killed characters": [
+                    {
+                      "character": "Robber",
+                      "number": 1
+                    }
+                  ],
+                  "scoring": [
+                    {
+                      "choices": "Save robbers"
+                    }
+                  ]
+                }
+              }
+          ]}
