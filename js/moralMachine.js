@@ -8,7 +8,7 @@ define([
       postRender: function() {
         console.log("coshema")
         this.getAssets();
-        this.setScenarios();
+        // this.setScenarios();
           // this.clickEvent();
           this.setReadyStatus();
           this.setupInviewCompletion();
@@ -17,6 +17,7 @@ define([
 
 
         let scenario = this.model.get('scenario');
+        console.log(scenario[1]["scenario-left"]["description"])
   
         // console.log(scenario);
         // console.log(scenario[0]['scenario-left']['direction'][0]['Direction type']);
@@ -53,32 +54,36 @@ define([
 
 
         let i = 0
-        console.log('coshema')
+        let j = 0
+        let k = 0
+        let l = 0
+    
         if (i < scenario.length) {
           $('#scenario-left, #scenario-right').on("click", function () {
             console.log('clicked')
-            // desc.text(scenario[++f][2]);
+
             
-            // leftImgEl.attr("src", objToArr[++j][0]);
-            // rightImgEl.attr("src", objToArr[++x][1]);
+            desc.text(scenario[i+=1]["scenario-left"]["description"]);
+            leftImgEl.attr("src", scenario[++j]["scenario-left"]["_graphic"]);
+            rightImgEl.attr("src", scenario[++k]["scenario-right"]["_graphic"]);
   
-            // leftImgEl.attr("scenario", ++y)
-            // rightImgEl.attr("scenario", ++y)
+            leftImgEl.attr("scenario", ++l)
+            rightImgEl.attr("scenario", ++l)
   
           });
-        } else if (i == objToArr.length) {
-          console.log("done");
+        } if (i == scenario.length) {
+          return console.log("done");
         }
         
       },
 
   
-      setScenarios : function () {
-        this.getAssets();
-        let desc = $(".description");
-        let leftImgEl = $("#scenario-left"); 
-        let rightImgEl = $("#scenario-right");
-      },
+      // setScenarios : function () {
+      //   this.getAssets();
+      //   let desc = $(".description");
+      //   let leftImgEl = $("#scenario-left"); 
+      //   let rightImgEl = $("#scenario-right");
+      // },
 
 
       // clickEvent : function () {
