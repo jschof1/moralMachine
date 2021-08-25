@@ -7,15 +7,14 @@ define([
   var MoralMachineView = ComponentView.extend({
       postRender: function() {
         console.log("coshema")
-          this.setScenarios();
-          this.getAssets();
-          this.setFirst();
+        this.getAssets();
+        this.setScenarios();
           // this.clickEvent();
           this.setReadyStatus();
           this.setupInviewCompletion();
       },
       getAssets : function() {
-      
+
 
         let scenario = this.model.get('scenario');
   
@@ -27,9 +26,10 @@ define([
       
         //left side
         var graphicLeft = scenario[0]["scenario-left"]["_graphic"]
-        var descriptionLeft = scenario[0]["scenario-left"]["description"][0]
+        var descriptionLeft = scenario[0]["scenario-left"]["description"]
         var scoreLeft = scenario[0]["scenario-left"]["scoring"]
-  
+        console.log(descriptionLeft)
+        //right side
         var savedCharactersLeft = scenario[0]["scenario-left"]["saved characters"]
   
         var killedCharactersLeft = scenario[0]["scenario-left"]["killed characters"]
@@ -40,25 +40,46 @@ define([
         var savedCharactersRight = scenario[0]["scenario-right"]["saved characters"];
         var killedCharactersRight = scenario[0]["scenario-right"]["killed characters"];
         
-        console.log("graphicLeft: " + graphicLeft);
-        console.log("graphicRight: " + graphicRight);
-      },
+        let desc = this.$(".description");
+        let leftImgEl = this.$("#scenario-left"); 
+        let rightImgEl = this.$("#scenario-right");
 
-      setScenarios : function () {
-        // let desc = $(".description");
-        // let leftImgEl = $("#scenario-left"); 
-        // let rightImgEl = $("#scenario-right");
-      },
+        //setting first 
 
-      setFirst : function () {
-        this.setScenarios()
-        this.getAssets();
-
-        // desc.text(descriptionLeft);
+        desc.text(descriptionLeft);
   
-        // leftImgEl.attr("src", graphicLeft);
-        // rightImgEl.attr("src", graphicRight);
+        leftImgEl.attr("src", graphicLeft);
+        rightImgEl.attr("src", graphicRight);
+
+
+        let i = 0
+        console.log('coshema')
+        if (i < scenario.length) {
+          $('#scenario-left, #scenario-right').on("click", function () {
+            console.log('clicked')
+            // desc.text(scenario[++f][2]);
+            
+            // leftImgEl.attr("src", objToArr[++j][0]);
+            // rightImgEl.attr("src", objToArr[++x][1]);
+  
+            // leftImgEl.attr("scenario", ++y)
+            // rightImgEl.attr("scenario", ++y)
+  
+          });
+        } else if (i == objToArr.length) {
+          console.log("done");
+        }
+        
       },
+
+  
+      setScenarios : function () {
+        this.getAssets();
+        let desc = $(".description");
+        let leftImgEl = $("#scenario-left"); 
+        let rightImgEl = $("#scenario-right");
+      },
+
 
       // clickEvent : function () {
       //   this.setScenarios()
