@@ -7,10 +7,10 @@ define([
   var MoralMachineView = ComponentView.extend({
       postRender: function() {
         console.log("coshema")
-
-          this.getAssets()
-          this.setFirst()
-          this.clickEvent()
+          this.setScenarios();
+          this.getAssets();
+          this.setFirst();
+          // this.clickEvent();
           this.setReadyStatus();
           this.setupInviewCompletion();
       },
@@ -44,49 +44,42 @@ define([
         console.log("graphicRight: " + graphicRight);
       },
 
+      setScenarios : function () {
+        // let desc = $(".description");
+        // let leftImgEl = $("#scenario-left"); 
+        // let rightImgEl = $("#scenario-right");
+      },
+
       setFirst : function () {
         this.setScenarios()
-        getAssets();
+        this.getAssets();
 
-        desc.text(descriptionLeft);
+        // desc.text(descriptionLeft);
   
-        leftImgEl.attr("src", graphicLeft);
-        rightImgEl.attr("src", graphicRight);
+        // leftImgEl.attr("src", graphicLeft);
+        // rightImgEl.attr("src", graphicRight);
       },
 
-      setScenarios : function () {
-        const desc = $(".description");
-        const leftImgEl = $("#scenario-left"); 
-        const rightImgEl = $("#scenario-right");
-    
-  
-        
-        
-
-       
-      },
-
-      clickEvent : function () {
-        let i 
-
-        this.getAssets()
-        console.log('coshema')
-        if (i < scenario.length) {
-          $('#scenario-left, #scenario-right').on("click", function () {
-            console.log('clicked')
-            desc.text(scenario[++f][2]);
+      // clickEvent : function () {
+      //   this.setScenarios()
+      //   let i = 0
+      //   console.log('coshema')
+      //   if (i < scenario.length) {
+      //     $('#scenario-left, #scenario-right').on("click", function () {
+      //       console.log('clicked')
+      //       // desc.text(scenario[++f][2]);
             
-            leftImgEl.attr("src", objToArr[++j][0]);
-            rightImgEl.attr("src", objToArr[++x][1]);
+      //       // leftImgEl.attr("src", objToArr[++j][0]);
+      //       // rightImgEl.attr("src", objToArr[++x][1]);
   
-            leftImgEl.attr("scenario", ++y)
-            rightImgEl.attr("scenario", ++y)
+      //       // leftImgEl.attr("scenario", ++y)
+      //       // rightImgEl.attr("scenario", ++y)
   
-          });
-        } else if (i == objToArr.length) {
-          console.log("done");
-        }
-      },
+      //     });
+      //   } else if (i == objToArr.length) {
+      //     console.log("done");
+      //   }
+      // },
 
   });
 
