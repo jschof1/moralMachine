@@ -67,25 +67,24 @@ define([
       console.log("graphicRight: " + graphicRight);
     },
 
-    clickEvent : function () {
-      let i 
-      this.getAssets()
-      if (i < scenario.length) {
-        $('#scenario-left, #scenario-right').on("click", function () {
+    // clickEvent : function () {
+    //   let i
+    //   if (i < scenario.length) {
+    //     $('#scenario-left, #scenario-right').on("click", function () {
 
-          desc.text(scenario[++f][2]);
+    //       desc.text(scenario[++f][2]);
           
-          leftImgEl.attr("src", objToArr[++j][0]);
-          rightImgEl.attr("src", objToArr[++x][1]);
+    //       leftImgEl.attr("src", objToArr[++j][0]);
+    //       rightImgEl.attr("src", objToArr[++x][1]);
 
-          leftImgEl.attr("scenario", ++y)
-          rightImgEl.attr("scenario", ++y)
+    //       leftImgEl.attr("scenario", ++y)
+    //       rightImgEl.attr("scenario", ++y)
 
-        });
-      } else if (i == objToArr.length) {
-        console.log("done");
-      }
-    },
+    //     });
+    //   } else if (i == objToArr.length) {
+    //     console.log("done");
+    //   }
+    // },
 
     storeResults : function() {
       let results = this.model.get('storageObject')
