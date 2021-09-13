@@ -3,69 +3,28 @@
   {{> component this}}
   <div class="component__widget moralMachine__widget{{#unless _isEnabled}} is-disabled{{#if _isInteractionComplete}} is-complete is-submitted show-user-answer{{#if _isCorrect}} is-correct{{/if}}{{/if}}{{/unless}}" role="{{#if _isRadio}}radiogroup{{else}}group{{/if}}">
 
- {{#each _items.set}}
-    <div class="moralMachine__item js-moralMachine-item item-{{@index}} {{odd @index}}{{#unless ../_isEnabled}}{{#if ../_canShowMarking}}{{#if _isCorrect}} is-correct{{else}} is-incorrect{{/if}}{{/if}}{{/unless}}">
 
-      <input class="moralMachine__item-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}}name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
-
-      <label class="moralMachine__item-label js-item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
-
-         <img class="moralMachine__item-image left-img" src="{{scenario-left._graphic}}" data-large="{{scenario-left._graphic}}" data-small="{{scenario-left._graphic}}" {{#if scenario-left._graphic}}aria-label="{{scenario-left.description}}"{{else}}aria-hidden="true"{{/if}}>
-        {{#if scenario-left.description}}
-        <div class="component__attribution moralMachine__attribution">
-          <div class="component__attribution-inner moralMachine__attribution-inner">
-            {{{scenario-left.description}}}
-          </div>
-        </div>
-        {{/if}}
-
-
-        <div class="moralMachine__item-option">
-
-          <div class="moralMachine__item-state">
-            <div class="moralMachine__item-icon moralMachine__item-answer-icon{{#if ../_isRadio}} is-radio{{else}} is-checkbox{{/if}}">
-              <div class="icon"></div>
-            </div>
-            <div class="moralMachine__item-icon moralMachine__item-correct-icon">
-              <div class="icon"></div>
-            </div>
-            <div class="moralMachine__item-icon moralMachine__item-incorrect-icon">
-              <div class="icon"></div>
-            </div>
-          </div>
-
-          {{#if text}}
-          <div class="moralMachine__item-text">
-            <div class="moralMachine__item-text-inner">
-              {{{text}}}
-            </div>
-          </div>
-          {{/if}}
-
-        </div>
-
-      </label>
-
-    </div>
- {{/each}}
-
+    <div class="moralMachine__item js-moralMachine-item item-0 odd">
 
 {{#each _items}}
-    <div class="moralMachine__item js-moralMachine-item item-{{@index}} {{odd @index}}{{#unless ../_isEnabled}}{{#if ../_canShowMarking}}{{#if _isCorrect}} is-correct{{else}} is-incorrect{{/if}}{{/if}}{{/unless}}">
-
-      <input class="moralMachine__item-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}}name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
+  {{#if @first}}
+      <input class="moralMachine__item-input right-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}} name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
 
       <label class="moralMachine__item-label js-item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
+  {{/if}}
+ {{/each}}
+         
+         <img class="moralMachine__item-image left left-img" src="{{scenario-left._graphic}}" data-large="{{scenario-left._graphic}}" data-small="{{scenario-left._graphic}}" {{#if scenario-left._graphic}}aria-label="{{scenario-left.description}}"{{else}}aria-hidden="true"{{/if}}>
 
-         <img class="moralMachine__item-image right-img" src="{{scenario-right._graphic}}" data-large="{{scenario-right._graphic}}" data-small="{{scenario-right._graphic}}" {{#if _graphic.alt}}aria-label="{{_graphic.description}}"{{else}}aria-hidden="true"{{/if}}>
-        {{#if scenario-right.description}}
-        <div class="component__attribution moralMachine__attribution">
-          <div class="component__attribution-inner moralMachine__attribution-inner">
-            {{{scenario-right.description}}}
+{{#each _items}}
+  {{#if @first}}
+          <div class="moralMachine__item-text">
+            <div class="moralMachine__item-text-inner left left-text">
+               {{{scenario-left.description}}}
+            </div>
           </div>
-        </div>
-        {{/if}}
-
+{{/if}}
+ {{/each}}
 
         <div class="moralMachine__item-option">
 
@@ -80,23 +39,57 @@
               <div class="icon"></div>
             </div>
           </div>
+        </div>
 
-          {{#if text}}
+      </label>
+
+    </div>
+
+
+
+    <div class="moralMachine__item js-moralMachine-item item-1 even{{#unless ../_isEnabled}}{{#if ../_canShowMarking}}{{#if _isCorrect}} is-correct{{else}} is-incorrect{{/if}}{{/if}}{{/unless}}">
+
+{{#each _items}}
+  {{#if @last}}
+      <input class="moralMachine__item-input right-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}} name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
+
+      <label class="moralMachine__item-label js-item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
+  {{/if}}
+ {{/each}}
+        
+         <img class="moralMachine__item-image right-img" src="{{scenario-right._graphic}}" data-large="{{scenario-right._graphic}}" data-small="{{scenario-right._graphic}}" {{#if _graphic.alt}}aria-label="{{_graphic.description}}"{{else}}aria-hidden="true"{{/if}}>
+
+{{#each _items}}
+  {{#if @first}}
           <div class="moralMachine__item-text">
-            <div class="moralMachine__item-text-inner">
-              {{{text}}}
+            <div class="moralMachine__item-text-inner right-text">
+               {{{scenario-right.description}}}
             </div>
           </div>
-          {{/if}}
+{{/if}}
+ {{/each}}
+
+        <div class="moralMachine__item-option">
+
+          <div class="moralMachine__item-state">
+            <div class="moralMachine__item-icon moralMachine__item-answer-icon is-checkbox">
+              <div class="icon"></div>
+            </div>
+            <div class="moralMachine__item-icon moralMachine__item-correct-icon">
+              <div class="icon"></div>
+            </div>
+            <div class="moralMachine__item-icon moralMachine__item-incorrect-icon">
+              <div class="icon"></div>
+            </div>
+          </div>
 
         </div>
 
       </label>
 
     </div>
- {{/each}}
 
- 
+
   </div>
   <div class="btn__container"></div>
 
