@@ -14,7 +14,7 @@
   {{/if}}
  {{/each}}
          
-         <img class="moralMachine__item-image left left-img" src="{{scenario-left._graphic}}" data-large="{{scenario-left._graphic}}" data-small="{{scenario-left._graphic}}" {{#if scenario-left._graphic}}aria-label="{{scenario-left.description}}"{{else}}aria-hidden="true"{{/if}}>
+         <img class="moralMachine__item-image-left left left-img" src="{{scenario-left._graphic}}" data-large="{{scenario-left._graphic}}" data-small="{{scenario-left._graphic}}" {{#if scenario-left._graphic}}aria-label="{{scenario-left.description}}"{{else}}aria-hidden="true"{{/if}}>
 
 {{#each _items}}
   {{#if @first}}
@@ -57,7 +57,7 @@
   {{/if}}
  {{/each}}
         
-         <img class="moralMachine__item-image right-img" src="{{scenario-right._graphic}}" data-large="{{scenario-right._graphic}}" data-small="{{scenario-right._graphic}}" {{#if _graphic.alt}}aria-label="{{_graphic.description}}"{{else}}aria-hidden="true"{{/if}}>
+         <img class="moralMachine__item-image-right right-img" src="{{scenario-right._graphic}}" data-large="{{scenario-right._graphic}}" data-small="{{scenario-right._graphic}}" {{#if _graphic.alt}}aria-label="{{_graphic.description}}"{{else}}aria-hidden="true"{{/if}}>
 
 {{#each _items}}
   {{#if @first}}

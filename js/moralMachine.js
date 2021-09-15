@@ -1,5 +1,3 @@
-const { data } = require("jquery");
-
 define([
   "core/js/adapt",
   "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
@@ -58,15 +56,6 @@ define([
         //setting first
         leftImgEl.attr("src", graphicLeft);
         rightImgEl.attr("src", graphicRight);
-
-        let i = 0;
-        let j = 0;
-        let k = 0;
-        let l = 0;
-
-        $(".btn-text").on("click", function () {
-          console.log("Button was clicked")
-        });
       },
 
       resizeImage: function (width) {
@@ -100,13 +89,12 @@ define([
   return Adapt.register("moralMachine", {
     view: moralMachine,
     model: Mcq.model.extend({
-      // This function is called every time you click Submit,
-      // so it is possible to create more than one data array,
-      // causing duplicate console logs
       storeCollectiveData: function () {
         let _items = this.get("_items");
         let data = []
         let count = 0;
+
+        console.log(count)
 
         data = flatten(data)
         console.log(count, data, _items)
@@ -137,10 +125,10 @@ define([
         function resetData() {
           data = []
           count = 0
+          newChoice(count)
         }
-        function newChoice () {
-          
-          if(!(count +1 > _items.length -1)) {
+        function newChoice (number= count +1) {
+          if(!(number > _items.length -1)) {
             let imgLeft = this.$(".left-img");
             let imgRight = this.$(".right-img");
             let descLeft = this.$(".left-text");
@@ -154,37 +142,42 @@ define([
           // Here you could trigger something to end the test
           // And you should make the test impossible to click again
         }
-        let scoreLeft = _items[0]["scenario-left"]["scoring"][0]["choices"];
-        let scoreRight = _items[0]["scenario-right"]["scoring"][0]["choices"];
+        function submitChoice() {
+          var inputs = $(".js-item-input")
+          inputs.map((i, e) => {
+            if(e != undefined)
+              if(e.checked === true) {
+                if(i === 0)
+                  pushData(getScoreLeft(count))
+                else
+                  pushData(getScoreRight(count))
+                e.checked = false
+
+                // Send event to mcqView.js to update inputs
+                let eventBody = {}
+                if(!(count > _items.length -1))
+                  eventBody.isEnabled = true
+                else
+                  eventBody.isEnabled = false
+                let resetInputs = new CustomEvent("reset-inputs", {detail: eventBody})
+                document.dispatchEvent(resetInputs)
+              }
+          })
+        }
         
-        //if clicked on left side push scoreLeft to array
-        // maybe change .left-img and use the entire div instead
-        // The way it is now it doesn't count when the user clicks the button.
-        $(".odd").on("click", function () {
-          pushData(getScoreLeft(count))
-        });
-
-        //if click on right side push scoreRight to array
-        $(".even").on("click", function () {
-          pushData(getScoreRight(count))
-        });
-
         $(".btn-text").on("click", () => {
-          resetData()
+          submitChoice()
         })
       },
-
+/* 
+      // Activated when submit is clicked
       setScore: function () {
-        this.storeCollectiveData();
+        // fetch('/path/to/database/' ...)
       },
-
+ */
       
       setAttemptSpecificFeedback: function () {
         return false;
-      },
-
-      onSubmit: function () {
-        this.setScore();
       },
     }),
   });
