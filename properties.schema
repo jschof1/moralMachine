@@ -15,7 +15,7 @@
             "default" : "both",
             "editorOnly" : true
         },
-        "scenario" : {
+        "_items" : {
             "type" : "array",
             "required" : true,
             "title" : "Scenario",
@@ -47,6 +47,14 @@
                                 "validators" : [],
                                 "help" : "The background image to display in this scenario"
                             },
+                             "_shouldBeSelected": {
+                                    "type": "boolean",
+                                    "required": true,
+                                    "default": false,
+                                    "title": "Correct answer?",
+                                    "inputType": "Checkbox",
+                                    "validators": []
+                                },
                             "description" : {
                                 "type" : "string",
                                 "required" : true,
@@ -86,7 +94,6 @@
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
-                                                "", 
                                                 "Female (adult)", 
                                                 "Female (professional e.g. doctor)", 
                                                 "Female (child)", 
@@ -102,8 +109,7 @@
                                             "title" : "Type",
                                             "inputType" : {
                                                 "type" : "Select",
-                                                "options" : [ 
-                                                    "", 
+                                                "options" : [
                                                     "Female (adult)", 
                                                     "Female (professional e.g. doctor)", 
                                                     "Female (child)", 
@@ -145,8 +151,7 @@
                                         "character" : {
                                             "type" : "string",
                                             "required" : false,
-                                            "enum" : [ 
-                                                "", 
+                                            "enum" : [
                                                 "Female (adult)", 
                                                 "Female (professional e.g. doctor)", 
                                                 "Female (child)", 
@@ -162,8 +167,7 @@
                                             "title" : "Type",
                                             "inputType" : {
                                                 "type" : "Select",
-                                                "options" : [ 
-                                                    "", 
+                                                "options" : [
                                                     "Female (adult)", 
                                                     "Female (professional e.g. doctor)", 
                                                     "Female (child)", 
@@ -206,8 +210,7 @@
                                             "type" : "string",
                                             "required" : false,
                                             "enum" : [ 
-                                                "", 
- 
+                                                "Avoid Intervention",
                                                 "Save people in car", 
                                                 "Save old", 
                                                 "Save young", 
@@ -222,10 +225,9 @@
                                             "title" : "Type",
                                             "inputType" : {
                                                 "type" : "Select",
-                                                "options" : [ 
-                                                    "", 
-     
-                                                    "Save people in car", 
+                                                "options" : [
+                                                    "Avoid Intervention",
+                                                    "Save people in car",  
                                                     "Save old", 
                                                     "Save young", 
                                                     "Save more people", 
@@ -258,6 +260,14 @@
                                 "validators" : [],
                                 "help" : "The background image to display in this scenario"
                             },
+                             "_shouldBeSelected": {
+                                    "type": "boolean",
+                                    "required": true,
+                                    "default": false,
+                                    "title": "Correct answer?",
+                                    "inputType": "Checkbox",
+                                    "validators": []
+                                },
                             "description" : {
                                 "type" : "string",
                                 "required" : true,
@@ -296,8 +306,7 @@
                                         "character" : {
                                             "type" : "string",
                                             "required" : false,
-                                            "enum" : [ 
-                                                "", 
+                                            "enum" : [
                                                 "Female (adult)", 
                                                 "Female (professional e.g. doctor)", 
                                                 "Female (child)", 
@@ -313,8 +322,7 @@
                                             "title" : "Type",
                                             "inputType" : {
                                                 "type" : "Select",
-                                                "options" : [ 
-                                                    "", 
+                                                "options" : [
                                                     "Female (adult)", 
                                                     "Female (professional e.g. doctor)", 
                                                     "Female (child)", 
@@ -356,8 +364,7 @@
                                         "character" : {
                                             "type" : "string",
                                             "required" : false,
-                                            "enum" : [ 
-                                                "", 
+                                            "enum" : [
                                                 "Female (adult)", 
                                                 "Female (professional e.g. doctor)", 
                                                 "Female (child)", 
@@ -373,8 +380,7 @@
                                             "title" : "Type",
                                             "inputType" : {
                                                 "type" : "Select",
-                                                "options" : [ 
-                                                    "", 
+                                                "options" : [
                                                     "Female (adult)", 
                                                     "Female (professional e.g. doctor)", 
                                                     "Female (child)", 
@@ -416,8 +422,8 @@
                                         "choices" : {
                                             "type" : "string",
                                             "required" : false,
-                                            "enum" : [ 
-                                                "", 
+                                            "enum" : [
+                                                "Avoid intervention",
                                                 "Save people in car", 
                                                 "Save old", 
                                                 "Save young", 
@@ -433,7 +439,7 @@
                                             "inputType" : {
                                                 "type" : "Select",
                                                 "options" : [ 
-                                                    "",
+                                                    "Avoid Intervention",
                                                     "Save people in car", 
                                                     "Save old", 
                                                     "Save young", 
