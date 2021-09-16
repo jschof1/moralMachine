@@ -10,6 +10,10 @@ define([
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
+
+        // Disable submit button on load
+        var $buttonsAction = this.$('.js-btn-action');
+        Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
       
       resetQuestion: function() {
@@ -56,6 +60,11 @@ define([
         //setting first
         leftImgEl.attr("src", graphicLeft);
         rightImgEl.attr("src", graphicRight);
+
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        let l = 0;
       },
 
       resizeImage: function (width) {
@@ -89,12 +98,13 @@ define([
   return Adapt.register("moralMachine", {
     view: moralMachine,
     model: Mcq.model.extend({
+      // This function is called every time you click Submit,
+      // so it is possible to create more than one data array,
+      // causing duplicate console logs
       storeCollectiveData: function () {
         let _items = this.get("_items");
         let data = []
         let count = 0;
-
-        console.log(count)
 
         data = flatten(data)
         console.log(count, data, _items)
@@ -103,16 +113,24 @@ define([
           return input.reduce((a, b) => a.concat(b), []);
         }
         function getScoreLeft(count) {
+          console.log("Score left")
+          // You can remove this conditional once you make
+          // the test unclickable after the user finishes it
           if(!(count > _items.length -1))
             return _items[count]["scenario-left"]["scoring"][0]["choices"];
           else console.log("Scenario does not exist")
         }
         function getScoreRight(count) {
+          console.log("Score right")
+          // You can remove this conditional once you make
+          // the test unclickable after the user finishes it
           if(!(count > _items.length -1))
             return _items[count]["scenario-right"]["scoring"][0]["choices"];
           else console.log("Scenario does not exist")
         }
         function pushData(idk) {
+          // You can remove this conditional once you make
+          // the test unclickable after the user finishes it
           if(!(count > _items.length -1)) {
             data.push(idk)
             data = flatten(data)
@@ -143,7 +161,7 @@ define([
           // And you should make the test impossible to click again
         }
         function submitChoice() {
-          var inputs = $(".js-item-input")
+          var inputs = $(".moralMachine__item-input")
           inputs.map((i, e) => {
             if(e != undefined)
               if(e.checked === true) {
@@ -152,6 +170,8 @@ define([
                 else
                   pushData(getScoreRight(count))
                 e.checked = false
+                var $buttonsAction = this.$('.js-btn-action');
+                Adapt.a11y.toggleEnabled($buttonsAction, false);
 
                 // Send event to mcqView.js to update inputs
                 let eventBody = {}
