@@ -176,6 +176,7 @@ define([
                 var $buttonsAction = this.$('.js-btn-action');
                 Adapt.a11y.toggleEnabled($buttonsAction, false);
 
+                // Send event to mcqView.js to update inputs
                 let eventBody = {}
                 if(!(count > _items.length -1))
                   eventBody.isEnabled = true
@@ -186,14 +187,6 @@ define([
               }
           })
         }
-
-        $(".moralMachine__item-label").on("click", () => {
-          var $buttonsAction = $('.js-btn-action');
-            setTimeout(() => {
-              // Enable submit button
-              Adapt.a11y.toggleEnabled($buttonsAction, true);
-            }, 1)
-        })
 
         $(".btn-text").on("click", () => {
           submitChoice()
