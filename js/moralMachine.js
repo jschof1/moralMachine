@@ -10,52 +10,31 @@ define([
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
+        
+        try {
+          this._runModelCompatibleFunction('storeCollectiveData');
+        } catch (err) {}
 
+        // Disable submit button on load
         var $buttonsAction = this.$('.js-btn-action');
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
-      resetQuestion: function() {
-        
-        let _items = this.model.get("_items");
-
-        count = 0;
-
-        var graphicLeft = _items[0]["scenario-left"]["_graphic"];
-
-        var graphicRight = _items[0]["scenario-right"]["_graphic"];
-        var descLeft = _items[0]["scenario-left"]["description"];
-
-        var descRight = _items[0]["scenario-right"]["description"];
-
-
-        let leftImgEl = this.$(".left-img");
-        let rightImgEl = this.$(".right-img");
-        let descLeftEl = this.$(".left-text");
-        let descRightEl= this.$(".right-text");
-
-
-        leftImgEl.attr("src", graphicLeft);
-        rightImgEl.attr("src", graphicRight);
-
-
-
-      },
+      
+      resetQuestion: function() {},
 
       getAssets: function () {
         let _items = this.model.get("_items");
 
-
+        //left side
         var graphicLeft = _items[0]["scenario-left"]["_graphic"];
-
+        //right side
         var graphicRight = _items[0]["scenario-right"]["_graphic"];
 
-
+        //dom elements
         let leftImgEl = this.$(".left-img");
         let rightImgEl = this.$(".right-img");
-        let leftDesc = this.$(".left-text");
-        let rightDesc = this.$(".right-text");
 
-
+        //setting first
         leftImgEl.attr("src", graphicLeft);
         rightImgEl.attr("src", graphicRight);
       },
@@ -92,9 +71,15 @@ define([
     view: moralMachine,
     model: Mcq.model.extend({
       storeCollectiveData: function () {
-        let _items = this.get("_items");
-        let data = []
-        let count = 0;
+        let _items = this.get("_items"),
+            data = [],
+            count = 0,
+            $submitBtn = $(".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"),
+            $inputs = $(".moralMachine__item-input"),
+            $labels = $(".moralMachine__item-label")
+        onItemSelect = function(event) {
+          console.log("onItemSelect")
+        }
 
         data = flatten(data)
         console.log(count, data, _items)
@@ -104,36 +89,18 @@ define([
         }
         function getScoreLeft(count) {
           console.log("Score left")
-  
-  
-          if(!(count > _items.length -1))
-            return _items[count]["scenario-left"]["scoring"][0]["choices"];
-          else console.log("Scenario does not exist")
+          return _items[count]["scenario-left"]["scoring"][0]["choices"];
         }
         function getScoreRight(count) {
           console.log("Score right")
-  
-  
-          if(!(count > _items.length -1))
-            return _items[count]["scenario-right"]["scoring"][0]["choices"];
-          else console.log("Scenario does not exist")
+          return _items[count]["scenario-right"]["scoring"][0]["choices"];
         }
         function pushData(idk) {
-  
-  
-          if(!(count > _items.length -1)) {
-            data.push(idk)
-            data = flatten(data)
-            newChoice()
-            console.log(count, data)
-            ++count
-          }
-          else console.log("Test finished.")
-        }
-        function resetData() {
-          data = []
-          count = 0
-          newChoice(count)
+          data.push(idk)
+          data = flatten(data)
+          newChoice()
+          console.log(count, data)
+          ++count
         }
         function newChoice (number= count +1) {
           if(!(number > _items.length -1)) {
@@ -146,35 +113,20 @@ define([
               descLeft.text(_items[count +1]["scenario-left"]["description"]);
               imgLeft.attr("src", _items[count +1]["scenario-left"]["_graphic"]);
               imgRight.attr("src", _items[count +1]["scenario-right"]["_graphic"]);
-          } else {
-            let imgLeft = this.$(".left-img");
-            let imgRight = this.$(".right-img");
-            let descLeft = this.$(".left-text");
-            let descRight= this.$(".right-text")
-            let overImg = "https://i.ibb.co/0nycRWg/game-over.png";
-
-            imgLeft.attr("src", overImg).fadeIn();
-            imgRight.attr("src", overImg).fadeIn();
-           
-            descRight.text("No more scenarios left").fadeIn();
-            descLeft.text("No more scenarios left").fadeIn();
-            
-            $(".moralMachine__button").hide();
-            $(".moralMachine__item-option").hide();
-          }
+          } else console.log("There are no more scenarios")
         }
         function submitChoice() {
-          var inputs = $(".moralMachine__item-input")
-          inputs.map((i, e) => {
+          $inputs.map((i, e) => {
             if(e != undefined)
               if(e.checked === true) {
                 if(i === 0)
                   pushData(getScoreLeft(count))
                 else
                   pushData(getScoreRight(count))
+                $submitBtn.prop("disabled", true)
+                $labels.filter('[data-adapt-index="' + i + '"]').toggleClass('is-selected', false)
                 e.checked = false
-                var $buttonsAction = this.$('.js-btn-action');
-                Adapt.a11y.toggleEnabled($buttonsAction, false);
+                Adapt.a11y.toggleEnabled($submitBtn, false);
 
                 // Send event to mcqView.js to update inputs
                 let eventBody = {}
@@ -187,18 +139,40 @@ define([
               }
           })
         }
-
-        $(".btn-text").on("click", () => {
+        $labels.on("click", () => {
+          if(count <= _items.length -1)
+            $submitBtn.prop("disabled", false)
+            
+            setTimeout(() => {
+              // Enable submit button
+              if(count <= _items.length -1) {
+                Adapt.a11y.toggleEnabled($submitBtn, true);
+                $submitBtn.text("SUBMIT BUTTON")
+              }
+              else
+                $submitBtn.text("Test finished")
+            }, 1)
+        })
+        
+        $submitBtn.on("click", (e) => {
           submitChoice()
+          setTimeout(() => {
+            e.target.innerText = "SUBMIT BUTTON"
+            if(count <= _items.length -1) {
+              this.attributes._isEnabled = true
+            } else {
+              this.attributes._isEnabled = false
+              $submitBtn.text("Test finished")
+              for(let i = 0; i < $inputs.length; i++) {
+                let $input = $inputs.filter('[data-adapt-index="' + i + '"]')
+                let $label = $labels.filter('[data-adapt-index="' + i + '"]')
+                $input.prop('disabled', true);
+                $label.toggleClass('is-disabled', true);
+              }
+            }
+          }, 1)
         })
       },
-
-      
-/* 
-      setScore: function () {
-
-      },
- */
       
       setAttemptSpecificFeedback: function () {
         return false;
