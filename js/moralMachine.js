@@ -113,8 +113,23 @@ define([
               descLeft.text(_items[count +1]["scenario-left"]["description"]);
               imgLeft.attr("src", _items[count +1]["scenario-left"]["_graphic"]);
               imgRight.attr("src", _items[count +1]["scenario-right"]["_graphic"]);
-          } else console.log("There are no more scenarios")
-        }
+          } else {
+              let imgLeft = this.$(".left-img");
+              let imgRight = this.$(".right-img");
+              let descLeft = this.$(".left-text");
+              let descRight= this.$(".right-text")
+              let overImg = "https://i.ibb.co/0nycRWg/game-over.png";
+  
+              imgLeft.attr("src", overImg).fadeIn();
+              imgRight.attr("src", overImg).fadeIn();
+             
+              descRight.text("No more scenarios left").fadeIn();
+              descLeft.text("No more scenarios left").fadeIn();
+              
+              $(".moralMachine__button").hide();
+              $(".moralMachine__item-option").hide();
+            }
+          }
         function submitChoice() {
           $inputs.map((i, e) => {
             if(e != undefined)
