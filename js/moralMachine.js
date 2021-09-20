@@ -118,7 +118,7 @@ define([
               let imgRight = this.$(".right-img");
               let descLeft = this.$(".left-text");
               let descRight= this.$(".right-text")
-              let overImg = "https://i.ibb.co/0nycRWg/game-over.png";
+              let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
   
               imgLeft.attr("src", overImg).fadeIn();
               imgRight.attr("src", overImg).fadeIn();
