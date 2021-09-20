@@ -8,9 +8,9 @@
 
 {{#each _items}}
   {{#if @first}}
-      <input class="moralMachine__item-input right-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}} name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
+      <input class="moralMachine__item-input right-input" id="{{../_id}}-{{@index}}" name="{{../_id}}-item" type="radio" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
 
-      <label class="moralMachine__item-label js-item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
+      <label class="moralMachine__item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
   {{/if}}
  {{/each}}
          
@@ -51,9 +51,9 @@
 
 {{#each _items}}
   {{#if @last}}
-      <input class="moralMachine__item-input right-input js-item-input" id="{{../_id}}-{{@index}}" {{#if ../_isRadio}} name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
+      <input class="moralMachine__item-input right-input" id="{{../_id}}-{{@index}}" name="{{../_id}}-item" type="radio" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
 
-      <label class="moralMachine__item-label js-item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
+      <label class="moralMachine__item-label{{#unless ../_isEnabled}} is-disabled{{/unless}}{{#if _isSelected}} is-selected{{/if}}{{#if _graphic.description}} has-attribution{{/if}}" aria-hidden="true" for="{{../_id}}-{{@index}}" data-adapt-index="{{_index}}" >
   {{/if}}
  {{/each}}
         
@@ -91,7 +91,6 @@
 
 
   </div>
-  
-  <div class="btn__container moralMachine__button"></div>
+  <div class="btn__container"></div>
 
 </div>

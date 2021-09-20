@@ -113,7 +113,7 @@ define([
               descLeft.text(_items[count +1]["scenario-left"]["description"]);
               imgLeft.attr("src", _items[count +1]["scenario-left"]["_graphic"]);
               imgRight.attr("src", _items[count +1]["scenario-right"]["_graphic"]);
-          } else {
+            } else {
               let imgLeft = this.$(".left-img");
               let imgRight = this.$(".right-img");
               let descLeft = this.$(".left-text");
@@ -128,8 +128,8 @@ define([
               
               $(".moralMachine__button").hide();
               $(".moralMachine__item-option").hide();
-            }
           }
+        }
         function submitChoice() {
           $inputs.map((i, e) => {
             if(e != undefined)
@@ -154,6 +154,22 @@ define([
               }
           })
         }
+        function updateInput() {
+          for(let i = 0; i < $inputs.length; i++) {
+            var input = $inputs.filter('[data-adapt-index="' + i + '"]')
+            var label = $labels.filter('[data-adapt-index="' + i + '"]')
+            input.toggleClass('is-disabled', false)
+            label.toggleClass('is-disabled', false)
+  
+            if(input[0].checked) {
+              label
+              .toggleClass('is-selected', true)
+            } else {
+              label
+              .toggleClass('is-selected', false)
+            }
+          }
+        }
         $labels.on("click", () => {
           if(count <= _items.length -1)
             $submitBtn.prop("disabled", false)
@@ -163,6 +179,7 @@ define([
               if(count <= _items.length -1) {
                 Adapt.a11y.toggleEnabled($submitBtn, true);
                 $submitBtn.text("SUBMIT BUTTON")
+                updateInput()
               }
               else
                 $submitBtn.text("Test finished")
