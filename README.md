@@ -2,9 +2,9 @@
 
 The Moral Machine Component is a question component built for the [Adapt framework](https://github.com/adaptlearning/adapt_framework). This component extends the [MCQ component](https://github.com/adaptlearning/adapt-contrib-mcq) and includes some of the functionalities found in the [GMCQ component](https://github.com/adaptlearning/adapt-contrib-gmcq).
 
-This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) game. This game looks at moral choices that driverless cars will be forced make. In this game, you will decide what the driverless will do.
+This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) game. This game looks at moral choices that driverless cars will be forced make. In this game, you will have to decide what the driverless will do.
 
-The game presents the user with a set of scenerios. Each scenario contains a dilemma forcing you to choose what the self-driving car decides to do. In both cases there will be fatalities. You must decide who the victims are.
+The game presents the user with a set of scenerios. In both cases there will be fatalities. You must decide who the victims are.
 
 
 ## Installation
