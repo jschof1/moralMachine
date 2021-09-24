@@ -105,9 +105,15 @@ A description of the core settings can be found at: [Core model attributes](http
 
 ### Data description
 
- `_graphic` displays what characters will be shown in the scenario
- `_description` is where you describe the concequences of the action
- `direction` allows you to choose whether the driverless car decides to go straight or swerve
- `saved characters` inputs what characters are saved
- `killed charecters` inputs what characters are killed 
- `scoring` outputs the users final choices
+ `_graphic` displays what characters will be shown in the scenario.
+ 
+ `_description` is where you describe the concequences of the action.
+ 
+ `direction` allows you to choose whether the driverless car decides to go straight or swerve.
+ 
+ `saved characters` inputs what characters are saved.
+ 
+ `killed charecters` inputs what characters are killed.
+ 
+ `scoring` outputs the users final choices.
+ 
