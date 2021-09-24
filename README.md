@@ -15,7 +15,10 @@ The game presents the user with a set of scenerios. In both cases there will be 
 
 Click on the top left hand corner drop-down and select *Plugin Management*. Then click the *Upload Plugin* button. Now, drap the zip file you just donwloaded from the link above and drop it onto the *Choose file* button.
 
-[Via the authoring tool:](media/16324746763004/guide-in-authoring-tool_ycctoi7k_xZLs.mp4)
+<video width="320" height="240" controls>
+  <source src="https://streamable.com/e/ylc1ua" type="video/mp4">
+</video>
+
 
 ##### Install the plugin via your OS's file manager
 
