@@ -13,7 +13,7 @@ To play, the user must click either one of the two images and then submit their 
 
 [Click here](https://github.com/jschof1/moralMachine/archive/refs/heads/master.zip) to download the folder which you will be importing. Once this has been downloaded you can either: 
 
-<u> Install the plugin via your Adapt Authoring tool </u>
+### Install the plugin via your Adapt Authoring tool
 
 Click on the top left hand corner drop-down and select *Plugin Management*. Then click the *Upload Plugin* button. Now, drap the zip file you just donwloaded from the link above and drop it onto the *Choose file* button.
 
@@ -21,7 +21,7 @@ Click on the top left hand corner drop-down and select *Plugin Management*. Then
   <source src="https://streamable.com/e/ylc1ua" type="video/mp4">
 </video>
 
-<u> Install the plugin via your OS's file manager </u>
+### Install the plugin via your OS's file manager 
 
 Unzip the downloaded file. Then, in your course folder navigate to the componets folder and drag the the unzipped folder into it.
 
