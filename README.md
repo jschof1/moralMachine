@@ -25,10 +25,6 @@ Click on the top left hand corner drop-down and select *Plugin Management*. Then
 
 Unzip the downloaded file. Then, in your course folder navigate to the componets folder and drag the the unzipped folder into it.
 
-## Usage
-
-Some details of how the plug-in might be used should be given here.
-
 
 ## Settings overview
 
