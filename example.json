@@ -1,174 +1,706 @@
-    {
-        "_id": "c-05",
-        "_parentId": "b-05",
-        "_type": "component",
-        "_component": "blank",
-        "_classes": "",
-        "_isOptional": true,
-        "scenario": [
+[
+  {
+    "_component": "moralMachine",
+    "_classes": "",
+    "_isOptional": false,
+    "_isAvailable": true,
+    "_isHidden": false,
+    "_isVisible": true,
+    "_isResetOnRevisit": "false",
+    "_ariaLevel": 0,
+    "_disableAccessibilityState": false,
+    "title": "Moral Machine",
+    "displayTitle": "Moral Machine",
+    "body": "Below you will be presented with 10 scenarios. It is up to you to decide what the self-driving car does. To start, click either image below and submit your decision by clicking the submit button. Don't forget to read description below the images!",
+    "_id": "61431f098bed197dd160af83",
+    "_parentId": "61431f008bed197dd160af82",
+    "_type": "component",
+    "_layout": "full",
+    "_onScreen": {
+      "_isEnabled": false,
+      "_classes": "",
+      "_percentInviewVertical": 50
+    },
+    "_items": [
+      {
+        "id": "122352322342",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/1-l.png",
+          "_shouldBeSelected": false,
+          "description": "Drive through a pedestrian crossing ahead. This will result in killing one male adult and saving one male adult",
+          "direction": "go straight",
+          "saved characters": [
             {
-              "id": "",
-              "scenario-left": {
-                "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
-                "description": "Click on either picture to submit your choice.",
-                "direction": [
-                  {
-                    "Direction type": "go straight"
-                  }
-                ],
-                "saved characters": [
-                  {
-                    "character": "Female (child)",
-                    "number": 3
-                  }
-                ],
-                "killed characters": [
-                  {
-                    "character": "Male (adult)",
-                    "number": 1
-                  }
-                ],
-                "scoring": [
-                  {
-                    "choices": "Save more people"
-                  }
-                ]
-              },
-              "scenario-right": {
-                "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
-                "description": "Click on either picture to submit your choice.",
-                "direction": [
-                  {
-                    "Direction type": "swerve"
-                  }
-                ],
-                "saved characters": [
-                  {
-                    "character": "Female (professional e.g. doctor)",
-                    "number": 1
-                  }
-                ],
-                "killed characters": [
-                  {
-                    "character": "Robber",
-                    "number": 1
-                  }
-                ],
-                "scoring": [
-                  {
-                    "choices": "Save robbers"
-                  }
-                ]
-              }
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": ["Save people in car", "Intervene"]
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/1-r.png",
+          "_shouldBeSelected": false,
+          "description": "Swerve and crash into a concrete barrier. This will result in killing one male adult and saving one male adult",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": ["Save pedestrians", "Avoid Intervention"]
+            }
+          ]
+        }
+      },
+      {
+        "id": "323423",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/2-l.png",
+          "_shouldBeSelected": false,
+          "description": "Kill one female adult and child and a male adult. Save a female (professional)",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (adult)",
+              "number": 1
             },
             {
-                "id": "",
-                "scenario-left": {
-                  "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
-                  "description": "Click on either picture to submit your choice.",
-                  "direction": [
-                    {
-                      "Direction type": "go straight"
-                    }
-                  ],
-                  "saved characters": [
-                    {
-                      "character": "Female (child)",
-                      "number": 3
-                    }
-                  ],
-                  "killed characters": [
-                    {
-                      "character": "Male (adult)",
-                      "number": 1
-                    }
-                  ],
-                  "scoring": [
-                    {
-                      "choices": "Save more people"
-                    }
-                  ]
-                },
-                "scenario-right": {
-                  "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
-                  "description": "Click on either picture to submit your choice.",
-                  "direction": [
-                    {
-                      "Direction type": "swerve"
-                    }
-                  ],
-                  "saved characters": [
-                    {
-                      "character": "Female (professional e.g. doctor)",
-                      "number": 1
-                    }
-                  ],
-                  "killed characters": [
-                    {
-                      "character": "Robber",
-                      "number": 1
-                    }
-                  ],
-                  "scoring": [
-                    {
-                      "choices": "Save robbers"
-                    }
-                  ]
-                }
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (child)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Avoid Intervention"
+            },
+            {
+              "choices": "Save professionals"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/2-r.png",
+          "_shouldBeSelected": false,
+          "description": "Save one female adult and child and a male. Save a female (professional)",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Baby",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more people"
+            },
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save people in car"
+            }
+          ]
+        }
+      },
+      {
+        "id": "122352322342",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/3-l.png",
+          "_shouldBeSelected": false,
+          "description": "Drive through a pedestrian crossing ahead will result in killing, one male, one female adult and one male child but saving one female (professional)",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (professional)",
+              "number": 1
+            },
+            {
+              "character": "Male (child)",
+              "number": 1
+            },
+            {
+              "character": "Male (man)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": 
+                "Save people in car"
               },
-              {
-                "id": "",
-                "scenario-left": {
-                  "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
-                  "description": "Click on either picture to submit your choice.",
-                  "direction": [
-                    {
-                      "Direction type": "go straight"
-                    }
-                  ],
-                  "saved characters": [
-                    {
-                      "character": "Female (child)",
-                      "number": 3
-                    }
-                  ],
-                  "killed characters": [
-                    {
-                      "character": "Male (adult)",
-                      "number": 1
-                    }
-                  ],
-                  "scoring": [
-                    {
-                      "choices": "Save more people"
-                    }
-                  ]
-                },
-                "scenario-right": {
-                  "_graphic": "course/en/assets/b1a88a618ba35849b6b9d5b2e27882bfccde5b15.png",
-                  "description": "Click on either picture to submit your choice.",
-                  "direction": [
-                    {
-                      "Direction type": "swerve"
-                    }
-                  ],
-                  "saved characters": [
-                    {
-                      "character": "Female (professional e.g. doctor)",
-                      "number": 1
-                    }
-                  ],
-                  "killed characters": [
-                    {
-                      "character": "Robber",
-                      "number": 1
-                    }
-                  ],
-                  "scoring": [
-                    {
-                      "choices": "Save robbers"
-                    }
-                  ]
-                }
+              {"choices": 
+              "Save old"
+              },
+              {"choices":
+                "Avoid intervention"
               }
-          ]}
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/3-r.png",
+          "_shouldBeSelected": false,
+          "description": "Swerving and crashing into the concrete barrier will result in killing a female (professional) and killing one male adult, male child and female adult",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save more lives"
+            }
+          ]
+        }
+      },
+      {
+        "id": "323423",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/4-l.png",
+          "_shouldBeSelected": false,
+          "description": "Drive straight to kill a female and male jogger (adult) but save the elderly male and female",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (adult)",
+              "number": 1
+            },
+            {
+              "character": "Male (elderly)",
+              "number": 1
+            },
+            {
+              "character": "Female (elderly)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save old"
+            },
+            {
+              "choices": "Avoid Intervention"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/4-r.png",
+          "_shouldBeSelected": false,
+          "description": "Swerve to kill and elderly male and female an save a male and a female jogger.",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male (jogger)",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (old)",
+              "number": 1
+            },
+            {
+              "character": "Female (old)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save young"
+            }
+          ]
+        }
+      },
+      {
+        "id": "122352322342",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/5-l.png",
+          "_shouldBeSelected": false,
+          "description": "Going straight will result in the death of one female child and a cat but saving an elderly male and female:",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (child)",
+              "number": 1
+            },
+            {
+              "character": "Pet (cat)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save old"
+            },
+            {
+              "choices": "Avoid Intervention"
+            },
+            {
+              "choices": "Save humans"
+            },
+            {
+              "choices": "Save lives"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/5-r.png",
+          "_shouldBeSelected": false,
+          "description": "This will result in saving one female child and cat but killing an elderly male and female",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save pets"
+            }
+          ]
+        }
+      },
+      {
+        "id": "323423",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/6-l.png",
+          "_shouldBeSelected": false,
+          "description": "3 Click on either picture to submit your choice.",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (adult)",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (child)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Avoid Intervention"
+            },
+            {
+              "choices": "Save professionals"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/6-r.png",
+          "_shouldBeSelected": false,
+          "description": "4 Click on either picture to submit your choice.",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Baby",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more people"
+            },
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save people in car"
+            }
+          ]
+        }
+      },
+      {
+        "id": "122352322342",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/7-l.png",
+          "_shouldBeSelected": false,
+          "description": "Drive through a pedestrian crossing ahead. This will result in:",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save young"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/7-r.png",
+          "_shouldBeSelected": false,
+          "description": "Swerve and crash into a contrete barrier. This will result in",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more"
+            }
+          ]
+        }
+      },
+      {
+        "id": "323423",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/8-l.png",
+          "_shouldBeSelected": false,
+          "description": "3 Click on either picture to submit your choice.",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (adult)",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (child)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Avoid Intervention"
+            },
+            {
+              "choices": "Save professionals"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/8-r.png",
+          "_shouldBeSelected": false,
+          "description": "4 Click on either picture to submit your choice.",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Baby",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more people"
+            },
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save people in car"
+            }
+          ]
+        }
+      },
+      {
+        "id": "122352322342",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/9-l.png",
+          "_shouldBeSelected": false,
+          "description": "Drive through a pedestrian crossing ahead. This will result in:",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save young"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/9-r.png",
+          "_shouldBeSelected": false,
+          "description": "Swerve and crash into a contrete barrier. This will result in",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Male (adult)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more"
+            }
+          ]
+        }
+      },
+      {
+        "id": "323423",
+        "scenario-left": {
+          "_graphic": "course/en/assets/scenarios/10-l.png",
+          "_shouldBeSelected": false,
+          "description": "3 Click on either picture to submit your choice.",
+          "direction": "go straight",
+          "saved characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (adult)",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (child)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Avoid Intervention"
+            },
+            {
+              "choices": "Save professionals"
+            }
+          ]
+        },
+        "scenario-right": {
+          "_graphic": "course/en/assets/scenarios/10-r.png",
+          "_shouldBeSelected": false,
+          "description": "4 Click on either picture to submit your choice.",
+          "direction": "swerve",
+          "saved characters": [
+            {
+              "character": "Baby",
+              "number": 1
+            },
+            {
+              "character": "Male (adult)",
+              "number": 1
+            },
+            {
+              "character": "Female (adult)",
+              "number": 1
+            }
+          ],
+          "killed characters": [
+            {
+              "character": "Female (professional e.g. doctor)",
+              "number": 1
+            }
+          ],
+          "scoring": [
+            {
+              "choices": "Save more people"
+            },
+            {
+              "choices": "Save young"
+            },
+            {
+              "choices": "Save people in car"
+            }
+          ]
+        }
+      }
+      
+    ],
+    "_canShowFeedback": true,
+    "_canShowMarking": true,
+    "_shouldDisplayAttempts": false,
+    "_recordInteraction": true,
+    "_questionWeight": 1,
+    "_feedback": {
+      "title": "",
+      "notFinal": ""
+    },
+    "_buttons": {
+      "_submit": {
+        "buttonText": "",
+        "ariaLabel": ""
+      },
+      "_reset": {
+        "buttonText": "",
+        "ariaLabel": ""
+      },
+      "_showCorrectAnswer": {
+        "buttonText": "",
+        "ariaLabel": ""
+      },
+      "_hideCorrectAnswer": {
+        "buttonText": "",
+        "ariaLabel": ""
+      },
+      "_showFeedback": {
+        "buttonText": "",
+        "ariaLabel": ""
+      }
+    }
+  }
+]

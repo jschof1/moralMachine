@@ -1,9 +1,18 @@
+.moralmachine {
+  &__body
+  {
+    line-height: 2;
+    font-size: 20px;
+  }
+}
+
 .moralMachine {
   &__widget {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+
 
 &__item {
   position: relative;
@@ -86,9 +95,16 @@
   }
 
 
-&__item-image {
+&__item-image-left {
 background-image: url("https://i.ibb.co/KVCHhXP/L.png");
 background-repeat: no-repeat;
+background-size: 98%;
+}
+
+&__item-image-right {
+  background-image: url("https://i.ibb.co/T8Jr86j/R.png");
+  background-repeat: no-repeat;
+  background-size: 98%;
 }
 
 &__item-label {
