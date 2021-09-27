@@ -21,7 +21,7 @@ Click on the top left hand corner drop-down and select *Plugin Management*. Then
   <source src="https://streamable.com/e/ylc1ua" type="video/mp4">
 </video>
 
-### <span style="text-decoration: underline">Install the plugin via your OS's file manager</span>
+###<span style="text-decoration: underline">Install the plugin via your OS's file manager</span>
 
 Unzip the downloaded file. Then, in your course folder navigate to the componets folder and drag the the unzipped folder into it.
 
