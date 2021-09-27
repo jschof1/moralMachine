@@ -6,6 +6,7 @@ This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) 
 
 The game presents the user with a set of scenerios. In both cases there will be fatalities. You must decide who the victims are.
 
+To play the game, the user must click either one of the two images and then submit their decision by clicking the submit button.
 
 ## Installation
 
