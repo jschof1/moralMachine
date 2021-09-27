@@ -4,14 +4,16 @@ The Moral Machine Component is a question component built for the [Adapt framewo
 
 This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) game. This game looks at moral choices that driverless cars will be forced make. In this game, you will have to decide what the driverless will do.
 
-The game presents the user with a set of scenerios. In both cases there will be fatalities. You must decide who the victims are.
+The game presents the user with a set of scenerios. In both cases there will be fatalities. The user must decide who will be saved and who the victims are.
+
+To play, the user must click either one of the two images and then submit their decision by clicking the submit button.
 
 
 ## Installation
 
 [Click here](https://github.com/jschof1/moralMachine/archive/refs/heads/master.zip) to download the folder which you will be importing. Once this has been downloaded you can either: 
 
-##### Install the plugin via your Adapt Authoring tool
+### Install the plugin via your Adapt Authoring tool
 
 Click on the top left hand corner drop-down and select *Plugin Management*. Then click the *Upload Plugin* button. Now, drap the zip file you just donwloaded from the link above and drop it onto the *Choose file* button.
 
@@ -19,15 +21,9 @@ Click on the top left hand corner drop-down and select *Plugin Management*. Then
   <source src="https://streamable.com/e/ylc1ua" type="video/mp4">
 </video>
 
-
-##### Install the plugin via your OS's file manager
+### Install the plugin via your OS's file manager
 
 Unzip the downloaded file. Then, in your course folder navigate to the componets folder and drag the the unzipped folder into it.
-
-## Usage
-
-Some details of how the plug-in might be used should be given here.
-
 
 ## Settings overview
 
@@ -46,7 +42,7 @@ Developers should give some description for data expected for their component an
         "_isOptional": true,
         "_items": [
             {
-              "id": "",
+              "id": "435342534",
               "scenario-left": {
                 "_graphic": "course/en/assets/2e77ca6a4e762df2f96d7da5a821835a36622bc6.png",
                 "description": "Click on either picture to submit your choice.",
