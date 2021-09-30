@@ -6,6 +6,7 @@ This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) 
 
 The game presents the user with a set of scenerios. In both cases there will be fatalities. You must decide who the victims are.
 
+To play the game, the user must click either one of the two images and then submit their decision by clicking the submit button.
 
 ## Installation
 
@@ -23,10 +24,6 @@ Click on the top left hand corner drop-down and select *Plugin Management*. Then
 ##### Install the plugin via your OS's file manager
 
 Unzip the downloaded file. Then, in your course folder navigate to the componets folder and drag the the unzipped folder into it.
-
-## Usage
-
-Some details of how the plug-in might be used should be given here.
 
 
 ## Settings overview
