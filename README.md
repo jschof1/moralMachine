@@ -4,7 +4,7 @@ The Moral Machine Component is a question component built for the [Adapt framewo
 
 This component is based on MIT's [Moral Machine](https://www.moralmachine.net/) game. This game looks at moral choices that driverless cars will be forced make. In this game, you will have to decide what the driverless will do.
 
-The game presents the user with a set of scenerios. In both cases there will be fatalities. You must decide who the victims are.
+The game presents the user with a set of scenerios. In both cases there will be fatalities. The user must decide who the victims are.
 
 To play the game, the user must click either one of the two images and then submit their decision by clicking the submit button.
 
