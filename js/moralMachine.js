@@ -32,7 +32,7 @@ define([
             descLeft.text(_items[count]["scenario-left"]["description"]);
             descRight.text(_items[count]["scenario-left"]["description"]);
             imgLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
-            imgLeft.attr("src", _items[count]["scenario-right"]["_graphic"]);
+            imgRight.attr("src", _items[count]["scenario-right"]["_graphic"]);
             console.log(count)
           } else {
             let imgLeft = this.$(".left-img");
