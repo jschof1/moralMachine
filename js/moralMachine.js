@@ -1,30 +1,48 @@
 define([
   "core/js/adapt",
-  "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
+  "components/adapt-contrib-mcq/js/adapt-contrib-mcq"
 ], function (Adapt, Mcq) {
   var moralMachine = Mcq.view.extend(
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
+        this.storeUserAnswer();
+        this.restoreUserAnswer();
+        this.storeCollectiveData();
         this.getAssets();
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
         
-        try {
-          this._runModelCompatibleFunction('storeCollectiveData');
-        } catch (err) {}
-
         // Disable submit button on load
         var $buttonsAction = this.$('.js-btn-action');
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
-      
-      resetQuestion: function() {},
+
+      restoreUserAnswer: function () {
+        let _items = this.model.get("_items");
+        let imgLeft = $(".left-img");
+        let imgRight = $(".right-img");
+        let descLeft = $(".left-text");
+        let descRight= $(".right-text");
+        let count = 0
+        if (count < _items.length) {
+          $('.btn-text').on("click", function () {
+            ++count 
+            descLeft.text(_items[count]["scenario-left"]["description"]);
+            descRight.text(_items[count]["scenario-left"]["description"]);
+            descLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
+            descLeft.attr("src", _items[count]["scenario-right"]["_graphic"]);
+            console.log(count)
+          });
+        } if (count == _items.length) {
+          return console.log("done");
+        }
+      },
 
       getAssets: function () {
+        
         let _items = this.model.get("_items");
-
         //left side
         var graphicLeft = _items[0]["scenario-left"]["_graphic"];
         //right side
@@ -37,6 +55,7 @@ define([
         //setting first
         leftImgEl.attr("src", graphicLeft);
         rightImgEl.attr("src", graphicRight);
+
       },
 
       resizeImage: function (width) {
@@ -61,55 +80,154 @@ define([
           isLarge ? 100 / columns + "%" : ""
         );
       },
-    },
-    {
-      template: "moralMachine",
-    }
-  );
-
-  return Adapt.register("moralMachine", {
-    view: moralMachine,
-    model: Mcq.model.extend({
       storeCollectiveData: function () {
-        let _items = this.get("_items"),
+        let _items = this.model.get("_items"),
             data = [],
             count = 0,
+            userAnswers = {
+              "age-preference": {
+                "Save young": 0,
+                "Save old": 0
+              },
+              "saving-more-lives": {
+                "Save less people": 0,
+                "Save more people": 0
+              },
+              "gender-preference": {
+                "Men": 0,
+                "Woman": 0
+              },
+              "protecting-passengers": {
+                "Save people in car": 0,
+                "Save pedestrians": 0
+              },
+              "species-preference": {
+                "Save humans": 0,
+                "Save animals": 0
+              },
+              "upholding-the-law": {
+                "Uphold Law": 0,
+                "Disobey Law": 0
+              },
+              "social-value-preference": {
+                "authority": 0,
+                "crime": 0
+              },
+              "avoiding-intervention": {
+                "Intervene": 0,
+                "Avoid Intervention": 0
+              },
+              "general-preference": {
+                "Most saved": "",
+                "Most Killed": ""
+              }
+            },
             $submitBtn = $(".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"),
             $inputs = $(".moralMachine__item-input"),
             $labels = $(".moralMachine__item-label")
-        onItemSelect = function(event) {
-          console.log("onItemSelect")
-        }
+        // onItemSelect = function(event) {
+        //   console.log("onItemSelect")
+        // }
 
         data = flatten(data)
-        console.log(count, data, _items)
-
         function flatten(input) {
           return input.reduce((a, b) => a.concat(b), []);
         }
         function getScoreLeft(count) {
-          console.log("Score left")
+          // console.log("Score left")
           return _items[count]["scenario-left"]["scoring"][0]["choices"];
         }
         function getScoreRight(count) {
-          console.log("Score right")
+          // console.log("Score right")
           return _items[count]["scenario-right"]["scoring"][0]["choices"];
         }
-        function pushData(idk) {
-          data.push(idk)
+        
+        function pushData(choice) {
+          let array = [].concat(choice)
+          console.log("Array", array)
+          array.map(v => {
+            switch(v) {
+              case "Save old": {
+                userAnswers["age-preference"]["Save old"]++
+                break;
+              }
+              case "Save young": {
+                userAnswers["age-preference"]["Save young"]++
+                break;
+              }
+              case "Save less people": {
+                userAnswers["saving-more-lives"]["Save less people"]++
+                break;
+              }
+              case "Save more people": {
+                userAnswers["saving-more-lives"]["Save more people"]++
+                break;
+              }
+              case "Men": {
+                userAnswers["gender-preference"].Men++
+                break;
+              }
+              case "Woman": {
+                userAnswers["gender-preference"].Woman++
+                break;
+              }
+              case "Save pedestrians": {
+                userAnswers["protecting-passengers"]["Save pedestrians"]++
+                break;
+              }
+              case "Save people in car": {
+                userAnswers["protecting-passengers"]["Save people in car"]++
+                break;
+              }
+              case "Save pedestrians": {
+                userAnswers["species-preference"]["Save animals"]++
+                break;
+              }
+              case "Save people in car": {
+                userAnswers["species-preference"]["Save humans"]++
+                break;
+              }
+              case "Disobey Law": {
+                userAnswers["upholding-the-law"]["Disobey Law"]++
+                break;
+              }
+              case "Uphold Law": {
+                userAnswers["upholding-the-law"]["Uphold Law"]++
+                break;
+              }
+              case "authority": {
+                userAnswers["social-value-preference"].authority++
+                break;
+              }
+              case "crime": {
+                userAnswers["social-value-preference"].crime++
+                break;
+              }
+              case "Intervene": {
+                userAnswers["avoiding-intervention"]["Intervene"]++
+                break;
+              }
+              case "Avoid Intervention": {
+                userAnswers["avoiding-intervention"]["Avoid Intervention"]++
+                break;
+              }
+            }
+          })
+          data.push(choice)
           data = flatten(data)
           newChoice()
-          console.log(count, data)
           ++count
+          console.log(count)
         }
-        function newChoice (number= count +1) {
+        function newChoice (number = count +1) {
           if(!(number > _items.length -1)) {
             let imgLeft = this.$(".left-img");
             let imgRight = this.$(".right-img");
             let descLeft = this.$(".left-text");
             let descRight= this.$(".right-text");
-  
+
               descRight.text(_items[count +1]["scenario-right"]["description"]);
+  
               descLeft.text(_items[count +1]["scenario-left"]["description"]);
               imgLeft.attr("src", _items[count +1]["scenario-left"]["_graphic"]);
               imgRight.attr("src", _items[count +1]["scenario-right"]["_graphic"]);
@@ -120,16 +238,16 @@ define([
               let descRight= this.$(".right-text")
               let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
   
-              imgLeft.attr("src", overImg).fadeIn();
-              imgRight.attr("src", overImg).fadeIn();
-             
-              descRight.text("No more scenarios left").fadeIn();
-              descLeft.text("No more scenarios left").fadeIn();
+              imgLeft.attr("src", overImg).css("border", "5px solid grey")
+              imgRight.attr("src", overImg).css("border", "5px solid grey")
+
+              descRight.text("No more scenarios left");
+              descLeft.text("No more scenarios left");
               
               $(".moralMachine__button").hide();
               $(".moralMachine__item-option").hide();
+            }
           }
-        }
         function submitChoice() {
           $inputs.map((i, e) => {
             if(e != undefined)
@@ -204,11 +322,30 @@ define([
             }
           }, 1)
         })
+        return userAnswers
       },
+
       
+      storeUserAnswer: function() {
+        var answers = this.storeCollectiveData();
+        this.model.set("_userAnswer", answers);
+        return answers
+      },
+
       setAttemptSpecificFeedback: function () {
         return false;
       },
+    },
+    {
+      template: "moralMachine",
+    }
+  );
+
+  return Adapt.register("moralMachine", {
+    view: moralMachine,
+
+    model: Mcq.model.extend({
+
     }),
   });
 });
