@@ -25,24 +25,37 @@ define([
         let imgRight = $(".right-img");
         let descLeft = $(".left-text");
         let descRight= $(".right-text");
-        let count = 0
-        if (count < _items.length) {
-          $('.btn-text').on("click", function () {
-            ++count 
+        let count = this.getAssets()
+        console.log(count)
+
+        if (!(count > _items.length -1)) {
             descLeft.text(_items[count]["scenario-left"]["description"]);
             descRight.text(_items[count]["scenario-left"]["description"]);
             descLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
             descLeft.attr("src", _items[count]["scenario-right"]["_graphic"]);
             console.log(count)
-          });
-        } if (count == _items.length) {
-          return console.log("done");
+          } else {
+            let imgLeft = this.$(".left-img");
+            let imgRight = this.$(".right-img");
+            let descLeft = this.$(".left-text");
+            let descRight= this.$(".right-text")
+            let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
+
+            imgLeft.attr("src", overImg).css("border", "5px solid grey")
+            imgRight.attr("src", overImg).css("border", "5px solid grey")
+
+            descRight.text("No more scenarios left");
+            descLeft.text("No more scenarios left");
+            
+            $(".moralMachine__button").hide();
+            $(".moralMachine__item-option").hide();
         }
       },
 
       getAssets: function () {
         
         let _items = this.model.get("_items");
+        let count = 0
         //left side
         var graphicLeft = _items[0]["scenario-left"]["_graphic"];
         //right side
@@ -55,7 +68,12 @@ define([
         //setting first
         leftImgEl.attr("src", graphicLeft);
         rightImgEl.attr("src", graphicRight);
+        
 
+        $('.btn-text').on("click", function () {
+          ++count 
+        })
+        return count
       },
 
       resizeImage: function (width) {
