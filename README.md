@@ -14,7 +14,7 @@ To play the game, the user must click either one of the two images and then subm
 
 ##### Install the plugin via your Adapt Authoring tool
 
-Click on the top left hand corner drop-down and select *Plugin Management*. Then click the *Upload Plugin* button. Now, drap the zip file you just donwloaded from the link above and drop it onto the *Choose file* button.
+Click on the top left hand corner drop-down and select *Plugin Management*. Then click the *Upload Plugin* button. Now, drop the zip file you just donwloaded from the link above and drop it onto the *Choose file* button.
 
 <video width="320" height="240" controls>
   <source src="https://streamable.com/e/ylc1ua" type="video/mp4">
