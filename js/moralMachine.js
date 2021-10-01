@@ -6,8 +6,8 @@ define([
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
+        this.resetUserAnswerObj()
         this.storeCollectiveData();
-        this.newTry()
         this.storeUserAnswer();
         this.restoreUserAnswer();
         this.resizeImage(Adapt.device.screenSize);
@@ -17,6 +17,14 @@ define([
         var $buttonsAction = this.$(".js-btn-action");
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
+
+      resetUserAnswerObj: function () {
+        let answers = this.model.get('userAnswers')[0]
+           for (let key in answers) {
+             answers[key] = 0;
+         }
+       },
+
       restoreUserAnswer: function () {
         let _items = this.model.get("_items"),
           imgLeft = $(".left-img"),
@@ -26,9 +34,7 @@ define([
           userAnswers = this.model.get("_userAnswer")[0]
           answer = this.model.get('userAnswers')
           count = 0;
-        if (count == 0) {
-        }
-        if (userAnswers) {
+        if ((!(number > _items.length - 1))) {
           descLeft.text(_items[count]["scenario-left"]["description"]);
           descRight.text(_items[count]["scenario-left"]["description"]);
           imgLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
@@ -69,17 +75,10 @@ define([
           isLarge ? 100 / columns + "%" : ""
         );
       },
-    
-      newTry: function () {
-        console.log(this.model.get('userAnswers'), 'farts')
-      },
       storeCollectiveData: function () {
         let _items = this.model.get("_items"),
-          data = [],
-          count = 0,
-          updated;
-          
-
+          count = 0;
+  
         (userAnswers = this.model.get('userAnswers')[0]),
           ($submitBtn = $(
             ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
@@ -329,12 +328,6 @@ define([
       resetStoredUserAnswer: function () {
         this.model.set("_userAnswer", []);
         },
-      resetUserAnswerObj: function () {
-       let answers = this.model.get('userAnswers')[0]
-          for (let key in answers) {
-            answers[key] = 0;
-        }
-      },
       setAttemptSpecificFeedback: function () {
         return false;
       },

@@ -1,684 +1,838 @@
 {
-    "type":"object",
-    "$schema":"http://json-schema.org/draft-04/schema",
-    "id":"http://jsonschema.net",
-    "$ref":"http://localhost/plugins/content/component/model.schema",
-    "properties" : {
-        "_supportedLayout" : {
-            "type" : "string",
-            "required" : true,
-            "enum" : [ 
-                "full-width", 
-                "half-width", 
-                "both"
-            ],
-            "default" : "both",
-            "editorOnly" : true
-        },
-        "_items" : {
-            "type" : "array",
-            "required" : true,
-            "title" : "Scenario",
-            "items" : {
-                "type" : "object",
-                "required" : true,
-                "properties" : {
-                    "id" : {
-                        "type" : "string",
-                        "title" : "Scenario ID",
-                        "required" : true,
-                        "inputType" : "Text",
-                        "validators" : [],
-                        "translatable" : true,
-                        "default" : "",
-                        "help" : "An ID for this scenario"
-                    },
-                    "scenario-left" : {
-                        "type" : "object",
-                        "required" : true,
-                        "title" : "Left hand scenario",
-                        "properties" : {
-                            "_graphic" : {
-                                "type" : "string",
-                                "required" : true,
-                                "title" : "Scenario image",
-                                "default" : "",
-                                "inputType" : "Asset:image",
-                                "validators" : [],
-                                "help" : "The background image to display in this scenario"
-                            },
-                             "_shouldBeSelected": {
-                                    "type": "boolean",
-                                    "required": true,
-                                    "default": false,
-                                    "title": "Correct answer?",
-                                    "inputType": "Checkbox",
-                                    "validators": []
-                                },
-                            "description" : {
-                                "type" : "string",
-                                "required" : true,
-                                "inputType" : "Text",
-                                "validators" : [],
-                                "translatable" : true,
-                                "default" : "Click on either picture to submit your choice.",
-                                "help" : "The scenario description"
-                            },
-                            "direction" : {
-                                "type" : "string",
-                                "required" : true,
-                                "enum" : [
-                                    "go straight",
-                                    "swerve"
-                                ],
-                                "default" : "go straight",
-                                "inputType" : {
-                                    "type" : "Select",
-                                    "options" : [
-                                        "go straight",
-                                        "swerve"
-                                    ]
-                                },
-                                "validators" : [],
-                                "help" : "The direction type"
-                            },
-                            "saved characters" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Saved characters",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "character" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [ 
-                                                "Female (adult)", 
-                                                "Female (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Male (adult)", 
-                                                "Male (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Baby", 
-                                                "Robber", 
-                                                "Pet (dog)", 
-                                                "Pet (cat)"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [
-                                                    "Female (adult)", 
-                                                    "Female (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Male (adult)", 
-                                                    "Male (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Baby", 
-                                                    "Robber", 
-                                                    "Pet (dog)", 
-                                                    "Pet (cat)"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        },
-                                        "number" : {
-                                            "type" : "number",
-                                            "required" : true,
-                                            "default" : 1,
-                                            "title" : "number saved",
-                                            "inputType" : "Number",
-                                            "validators" : [ 
-                                                "required", 
-                                                "number"
-                                            ],
-                                            "help" : "How many of this character are saved?"
-                                        }
-                                    }
-                                }
-                            },
-                            "killed characters" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Killed characters",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "character" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [
-                                                "Female (adult)", 
-                                                "Female (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Male (adult)", 
-                                                "Male (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Baby", 
-                                                "Robber", 
-                                                "Pet (dog)", 
-                                                "Pet (cat)"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [
-                                                    "Female (adult)", 
-                                                    "Female (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Male (adult)", 
-                                                    "Male (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Baby", 
-                                                    "Robber", 
-                                                    "Pet (dog)", 
-                                                    "Pet (cat)"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        },
-                                        "number" : {
-                                            "type" : "number",
-                                            "required" : true,
-                                            "default" : 1,
-                                            "title" : "number saved",
-                                            "inputType" : "Number",
-                                            "validators" : [ 
-                                                "required", 
-                                                "number"
-                                            ],
-                                            "help" : "How many of this character are saved?"
-                                        }
-                                    }
-                                }
-                            },
-                            "scoring" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Results of choice",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "choices" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [ 
-                                                "Avoid Intervention",
-                                                "Save people in car", 
-                                                "Save old", 
-                                                "Save young", 
-                                                "Save more people", 
-                                                "Save humans", 
-                                                "Save pets", 
-                                                "Save professionals", 
-                                                "Save robbers", 
-                                                "Uphold law"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [
-                                                    "Avoid Intervention",
-                                                    "Save people in car",  
-                                                    "Save old", 
-                                                    "Save young", 
-                                                    "Save more people", 
-                                                    "Save humans", 
-                                                    "Save pets", 
-                                                    "Save professionals", 
-                                                    "Save robbers", 
-                                                    "Uphold law"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "scenario-right" : {
-                        "type" : "object",
-                        "required" : true,
-                        "title" : "Right hand scenario",
-                        "properties" : {
-                            "_graphic" : {
-                                "type" : "string",
-                                "required" : true,
-                                "title" : "Scenario image",
-                                "default" : "",
-                                "inputType" : "Asset:image",
-                                "validators" : [],
-                                "help" : "The background image to display in this scenario"
-                            },
-                             "_shouldBeSelected": {
-                                    "type": "boolean",
-                                    "required": true,
-                                    "default": false,
-                                    "title": "Correct answer?",
-                                    "inputType": "Checkbox",
-                                    "validators": []
-                                },
-                            "description" : {
-                                "type" : "string",
-                                "required" : true,
-                                "inputType" : "Text",
-                                "validators" : [],
-                                "translatable" : true,
-                                "default" : "Click on either picture to submit your choice.",
-                                "help" : "The scenario description"
-                            },
-                           "direction" : {
-                                "type" : "string",
-                                "required" : true,
-                                "enum" : [
-                                    "go straight",
-                                    "swerve"
-                                ],
-                                "default" : "go straight",
-                                "inputType" : {
-                                    "type" : "Select",
-                                    "options" : [
-                                        "go straight",
-                                        "swerve"
-                                    ]
-                                },
-                                "validators" : [],
-                                "help" : "The direction type"
-                            },
-                            "saved characters" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Saved characters",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "character" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [
-                                                "Female (adult)", 
-                                                "Female (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Male (adult)", 
-                                                "Male (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Baby", 
-                                                "Robber", 
-                                                "Pet (dog)", 
-                                                "Pet (cat)"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [
-                                                    "Female (adult)", 
-                                                    "Female (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Male (adult)", 
-                                                    "Male (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Baby", 
-                                                    "Robber", 
-                                                    "Pet (dog)", 
-                                                    "Pet (cat)"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        },
-                                        "number" : {
-                                            "type" : "number",
-                                            "required" : true,
-                                            "default" : 1,
-                                            "title" : "number saved",
-                                            "inputType" : "Number",
-                                            "validators" : [ 
-                                                "required", 
-                                                "number"
-                                            ],
-                                            "help" : "How many of this character are saved?"
-                                        }
-                                    }
-                                }
-                            },
-                            "killed characters" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Killed characters",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "character" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [
-                                                "Female (adult)", 
-                                                "Female (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Male (adult)", 
-                                                "Male (professional e.g. doctor)", 
-                                                "Female (child)", 
-                                                "Baby", 
-                                                "Robber", 
-                                                "Pet (dog)", 
-                                                "Pet (cat)"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [
-                                                    "Female (adult)", 
-                                                    "Female (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Male (adult)", 
-                                                    "Male (professional e.g. doctor)", 
-                                                    "Female (child)", 
-                                                    "Baby", 
-                                                    "Robber", 
-                                                    "Pet (dog)", 
-                                                    "Pet (cat)"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        },
-                                        "number" : {
-                                            "type" : "number",
-                                            "required" : true,
-                                            "default" : 1,
-                                            "title" : "number saved",
-                                            "inputType" : "Number",
-                                            "validators" : [ 
-                                                "required", 
-                                                "number"
-                                            ],
-                                            "help" : "How many of this character are saved?"
-                                        }
-                                    }
-                                }
-                            },
-                            "scoring" : {
-                                "type" : "array",
-                                "required" : true,
-                                "title" : "Results of choice",
-                                "items" : {
-                                    "type" : "object",
-                                    "required" : true,
-                                    "properties" : {
-                                        "choices" : {
-                                            "type" : "string",
-                                            "required" : false,
-                                            "enum" : [
-                                                "Avoid intervention",
-                                                "Save people in car", 
-                                                "Save old", 
-                                                "Save young", 
-                                                "Save more people", 
-                                                "Save humans", 
-                                                "Save pets", 
-                                                "Save professionals", 
-                                                "Save robbers", 
-                                                "Uphold law"
-                                            ],
-                                            "default" : "",
-                                            "title" : "Type",
-                                            "inputType" : {
-                                                "type" : "Select",
-                                                "options" : [ 
-                                                    "Avoid Intervention",
-                                                    "Save people in car", 
-                                                    "Save old", 
-                                                    "Save young", 
-                                                    "Save more people", 
-                                                    "Save humans", 
-                                                    "Save pets", 
-                                                    "Save professionals", 
-                                                    "Save robbers", 
-                                                    "Uphold law"
-                                                ]
-                                            },
-                                            "validators" : [],
-                                            "help" : "Select the type of character saved."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "_canShowFeedback" : {
-            "type" : "boolean",
-            "required" : true,
-            "default" : true,
-            "title" : "Display Feedback",
-            "inputType" : "Checkbox",
-            "validators" : []
-        },
-        "_canShowMarking" : {
-            "type" : "boolean",
-            "default" : true,
-            "title" : "Display Marking",
-            "inputType" : "Checkbox",
-            "validators" : []
-        },
-        "_shouldDisplayAttempts" : {
-            "type" : "boolean",
-            "required" : false,
-            "default" : false,
-            "title" : "Display Attempts",
-            "inputType" : "Checkbox",
-            "validators" : [],
-            "help" : "Display the number of attempts remaining?"
-        },
-        "_recordInteraction" : {
-            "type" : "boolean",
-            "required" : false,
-            "default" : true,
-            "title" : "Record interaction",
-            "inputType" : "Checkbox",
-            "validators" : [],
-            "help" : "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only."
-        },
-        "_questionWeight" : {
-            "type" : "number",
-            "required" : false,
-            "default" : 1,
-            "title" : "Question Weight",
-            "inputType" : "Number",
-            "validators" : [ 
-                "number"
-            ],
-            "help" : "How much this question is worth"
-        },
-        "_feedback" : {
-            "type" : "object",
-            "required" : false,
-            "title" : "Feedback",
-            "properties" : {
-                "title" : {
-                    "type" : "string",
-                    "required" : false,
-                    "default" : "",
-                    "title" : "Feedback Title",
-                    "inputType" : "Text",
-                    "validators" : [],
-                    "help" : "Leave blank to have the component's title shown instead.",
-                    "translatable" : true
-                },
-                "notFinal" : {
-                    "type" : "string",
-                    "required" : false,
-                    "default" : "",
-                    "title" : "Incorrect Not Final",
-                    "inputType" : "TextArea",
-                    "validators" : [],
-                    "help" : "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
-                    "translatable" : true
-                }
-            }
-        },
-        "_buttons": {
-          "type": "object",
-          "title": "Buttons",
-          "required": false,
-          "properties": {
-            "_submit": {
-              "type": "object",
-              "title": "Submit",
-              "properties": {
-                "buttonText": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Button label text for the submit button",
-                  "translatable": true
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Aria label for the submit button",
-                  "translatable": true
-                }
-              }
-            },
-            "_reset": {
-              "type": "object",
-              "title": "Reset",
-              "properties": {
-                "buttonText": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Button label text for the reset button",
-                  "translatable": true
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Aria label for the reset button",
-                  "translatable": true
-                }
-              }
-            },
-            "_showCorrectAnswer": {
-              "type": "object",
-              "title": "Show Correct Answer",
-              "properties": {
-                "buttonText": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Button label text to show the model answer",
-                  "translatable": true
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Aria label for the show model answer button",
-                  "translatable": true
-                }
-              }
-            },
-            "_hideCorrectAnswer": {
-              "type": "object",
-              "title": "Hide Correct Answer",
-              "properties": {
-                "buttonText": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Button label text to hide the model answer",
-                  "translatable": true
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Aria label for the hide model answer button",
-                  "translatable": true
-                }
-              }
-            },
-            "_showFeedback": {
-              "type": "object",
-              "title": "Show Feedback",
-              "properties": {
-                "buttonText": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Button label text to show feedback",
-                  "translatable": true
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "required": false,
-                  "default": "",
-                  "title": "",
-                  "inputType": "QuestionButton",
-                  "validators": [],
-                  "help": "Aria label for the show feedback button",
-                  "translatable": true
-                }
-              }
-            }
-          }
-        }
-    },
-    "globals" : {
-        "ariaRegion" : {
-            "type" : "string",
-            "required" : true,
-            "default" : "Click on either picture to submit your choice.",
-            "inputType" : "Text",
-            "validators" : [],
-            "translatable" : true
-        }
-    }
+	"type": "object",
+	"$schema": "http://json-schema.org/draft-04/schema",
+	"id": "http://jsonschema.net",
+	"$ref": "http://localhost/plugins/content/component/model.schema",
+	"properties": {
+		"_supportedLayout": {
+			"type": "string",
+			"required": true,
+			"enum": [
+				"full-width",
+				"half-width",
+				"both"
+			],
+			"default": "both",
+			"editorOnly": true
+		},
+		"userAnswers": {
+			"type": "array",
+			"items": [{
+				"type": "object",
+				"properties": {
+					"age-preference": {
+						"type": "object",
+						"properties": {
+							"Save young": {
+								"type": "integer"
+							},
+							"Save old": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Save young",
+							"Save old"
+						]
+					},
+					"saving-more-lives": {
+						"type": "object",
+						"properties": {
+							"Save less people": {
+								"type": "integer"
+							},
+							"Save more people": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Save less people",
+							"Save more people"
+						]
+					},
+					"gender-preference": {
+						"type": "object",
+						"properties": {
+							"Men": {
+								"type": "integer"
+							},
+							"Woman": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Men",
+							"Woman"
+						]
+					},
+					"protecting-passengers": {
+						"type": "object",
+						"properties": {
+							"Save people in car": {
+								"type": "integer"
+							},
+							"Save pedestrians": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Save people in car",
+							"Save pedestrians"
+						]
+					},
+					"species-preference": {
+						"type": "object",
+						"properties": {
+							"Save humans": {
+								"type": "integer"
+							},
+							"Save animals": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Save humans",
+							"Save animals"
+						]
+					},
+					"upholding-the-law": {
+						"type": "object",
+						"properties": {
+							"Uphold Law": {
+								"type": "integer"
+							},
+							"Disobey Law": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Uphold Law",
+							"Disobey Law"
+						]
+					},
+					"social-value-preference": {
+						"type": "object",
+						"properties": {
+							"authority": {
+								"type": "integer"
+							},
+							"crime": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"authority",
+							"crime"
+						]
+					},
+					"avoiding-intervention": {
+						"type": "object",
+						"properties": {
+							"Intervene": {
+								"type": "integer"
+							},
+							"Avoid Intervention": {
+								"type": "integer"
+							}
+						},
+						"required": [
+							"Intervene",
+							"Avoid Intervention"
+						]
+					},
+					"general-preference": {
+						"type": "object",
+						"properties": {
+							"Most saved": {
+								"type": "string"
+							},
+							"Most Killed": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"Most saved",
+							"Most Killed"
+						]
+					}
+				},
+				"required": [
+					"age-preference",
+					"saving-more-lives",
+					"gender-preference",
+					"protecting-passengers",
+					"species-preference",
+					"upholding-the-law",
+					"social-value-preference",
+					"avoiding-intervention",
+					"general-preference"
+				]
+			}]
+		},
+		"_items": {
+			"type": "array",
+			"required": true,
+			"title": "Scenario",
+			"items": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"id": {
+						"type": "string",
+						"title": "Scenario ID",
+						"required": true,
+						"inputType": "Text",
+						"validators": [],
+						"translatable": true,
+						"default": "",
+						"help": "An ID for this scenario"
+					},
+					"scenario-left": {
+						"type": "object",
+						"required": true,
+						"title": "Left hand scenario",
+						"properties": {
+							"_graphic": {
+								"type": "string",
+								"required": true,
+								"title": "Scenario image",
+								"default": "",
+								"inputType": "Asset:image",
+								"validators": [],
+								"help": "The background image to display in this scenario"
+							},
+							"_shouldBeSelected": {
+								"type": "boolean",
+								"required": true,
+								"default": false,
+								"title": "Correct answer?",
+								"inputType": "Checkbox",
+								"validators": []
+							},
+							"description": {
+								"type": "string",
+								"required": true,
+								"inputType": "Text",
+								"validators": [],
+								"translatable": true,
+								"default": "Click on either picture to submit your choice.",
+								"help": "The scenario description"
+							},
+							"direction": {
+								"type": "string",
+								"required": true,
+								"enum": [
+									"go straight",
+									"swerve"
+								],
+								"default": "go straight",
+								"inputType": {
+									"type": "Select",
+									"options": [
+										"go straight",
+										"swerve"
+									]
+								},
+								"validators": [],
+								"help": "The direction type"
+							},
+							"saved characters": {
+								"type": "array",
+								"required": true,
+								"title": "Saved characters",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"character": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Female (adult)",
+												"Female (professional e.g. doctor)",
+												"Female (child)",
+												"Male (adult)",
+												"Male (professional e.g. doctor)",
+												"Female (child)",
+												"Baby",
+												"Robber",
+												"Pet (dog)",
+												"Pet (cat)"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Female (adult)",
+													"Female (professional e.g. doctor)",
+													"Female (child)",
+													"Male (adult)",
+													"Male (professional e.g. doctor)",
+													"Female (child)",
+													"Baby",
+													"Robber",
+													"Pet (dog)",
+													"Pet (cat)"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										},
+										"number": {
+											"type": "number",
+											"required": true,
+											"default": 1,
+											"title": "number saved",
+											"inputType": "Number",
+											"validators": [
+												"required",
+												"number"
+											],
+											"help": "How many of this character are saved?"
+										}
+									}
+								}
+							},
+							"killed characters": {
+								"type": "array",
+								"required": true,
+								"title": "Killed characters",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"character": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Female (adult)",
+												"Female (professional e.g. doctor)",
+												"Female (child)",
+												"Male (adult)",
+												"Male (professional e.g. doctor)",
+												"Female (child)",
+												"Baby",
+												"Robber",
+												"Pet (dog)",
+												"Pet (cat)"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Female (adult)",
+													"Female (professional e.g. doctor)",
+													"Female (child)",
+													"Male (adult)",
+													"Male (professional e.g. doctor)",
+													"Female (child)",
+													"Baby",
+													"Robber",
+													"Pet (dog)",
+													"Pet (cat)"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										},
+										"number": {
+											"type": "number",
+											"required": true,
+											"default": 1,
+											"title": "number saved",
+											"inputType": "Number",
+											"validators": [
+												"required",
+												"number"
+											],
+											"help": "How many of this character are saved?"
+										}
+									}
+								}
+							},
+							"scoring": {
+								"type": "array",
+								"required": true,
+								"title": "Results of choice",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"choices": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Avoid Intervention",
+												"Save people in car",
+												"Save old",
+												"Save young",
+												"Save more people",
+												"Save humans",
+												"Save pets",
+												"Save professionals",
+												"Save robbers",
+												"Uphold law"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Avoid Intervention",
+													"Save people in car",
+													"Save old",
+													"Save young",
+													"Save more people",
+													"Save humans",
+													"Save pets",
+													"Save professionals",
+													"Save robbers",
+													"Uphold law"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										}
+									}
+								}
+							}
+						}
+					},
+					"scenario-right": {
+						"type": "object",
+						"required": true,
+						"title": "Right hand scenario",
+						"properties": {
+							"_graphic": {
+								"type": "string",
+								"required": true,
+								"title": "Scenario image",
+								"default": "",
+								"inputType": "Asset:image",
+								"validators": [],
+								"help": "The background image to display in this scenario"
+							},
+							"_shouldBeSelected": {
+								"type": "boolean",
+								"required": true,
+								"default": false,
+								"title": "Correct answer?",
+								"inputType": "Checkbox",
+								"validators": []
+							},
+							"description": {
+								"type": "string",
+								"required": true,
+								"inputType": "Text",
+								"validators": [],
+								"translatable": true,
+								"default": "Click on either picture to submit your choice.",
+								"help": "The scenario description"
+							},
+							"direction": {
+								"type": "string",
+								"required": true,
+								"enum": [
+									"go straight",
+									"swerve"
+								],
+								"default": "go straight",
+								"inputType": {
+									"type": "Select",
+									"options": [
+										"go straight",
+										"swerve"
+									]
+								},
+								"validators": [],
+								"help": "The direction type"
+							},
+							"saved characters": {
+								"type": "array",
+								"required": true,
+								"title": "Saved characters",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"character": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Female (adult)",
+												"Female (professional e.g. doctor)",
+												"Female (child)",
+												"Male (adult)",
+												"Male (professional e.g. doctor)",
+												"Female (child)",
+												"Baby",
+												"Robber",
+												"Pet (dog)",
+												"Pet (cat)"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Female (adult)",
+													"Female (professional e.g. doctor)",
+													"Female (child)",
+													"Male (adult)",
+													"Male (professional e.g. doctor)",
+													"Female (child)",
+													"Baby",
+													"Robber",
+													"Pet (dog)",
+													"Pet (cat)"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										},
+										"number": {
+											"type": "number",
+											"required": true,
+											"default": 1,
+											"title": "number saved",
+											"inputType": "Number",
+											"validators": [
+												"required",
+												"number"
+											],
+											"help": "How many of this character are saved?"
+										}
+									}
+								}
+							},
+							"killed characters": {
+								"type": "array",
+								"required": true,
+								"title": "Killed characters",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"character": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Female (adult)",
+												"Female (professional e.g. doctor)",
+												"Female (child)",
+												"Male (adult)",
+												"Male (professional e.g. doctor)",
+												"Female (child)",
+												"Baby",
+												"Robber",
+												"Pet (dog)",
+												"Pet (cat)"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Female (adult)",
+													"Female (professional e.g. doctor)",
+													"Female (child)",
+													"Male (adult)",
+													"Male (professional e.g. doctor)",
+													"Female (child)",
+													"Baby",
+													"Robber",
+													"Pet (dog)",
+													"Pet (cat)"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										},
+										"number": {
+											"type": "number",
+											"required": true,
+											"default": 1,
+											"title": "number saved",
+											"inputType": "Number",
+											"validators": [
+												"required",
+												"number"
+											],
+											"help": "How many of this character are saved?"
+										}
+									}
+								}
+							},
+							"scoring": {
+								"type": "array",
+								"required": true,
+								"title": "Results of choice",
+								"items": {
+									"type": "object",
+									"required": true,
+									"properties": {
+										"choices": {
+											"type": "string",
+											"required": false,
+											"enum": [
+												"Avoid intervention",
+												"Save people in car",
+												"Save old",
+												"Save young",
+												"Save more people",
+												"Save humans",
+												"Save pets",
+												"Save professionals",
+												"Save robbers",
+												"Uphold law"
+											],
+											"default": "",
+											"title": "Type",
+											"inputType": {
+												"type": "Select",
+												"options": [
+													"Avoid Intervention",
+													"Save people in car",
+													"Save old",
+													"Save young",
+													"Save more people",
+													"Save humans",
+													"Save pets",
+													"Save professionals",
+													"Save robbers",
+													"Uphold law"
+												]
+											},
+											"validators": [],
+											"help": "Select the type of character saved."
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"_canShowFeedback": {
+			"type": "boolean",
+			"required": true,
+			"default": true,
+			"title": "Display Feedback",
+			"inputType": "Checkbox",
+			"validators": []
+		},
+		"_canShowMarking": {
+			"type": "boolean",
+			"default": true,
+			"title": "Display Marking",
+			"inputType": "Checkbox",
+			"validators": []
+		},
+		"_shouldDisplayAttempts": {
+			"type": "boolean",
+			"required": false,
+			"default": false,
+			"title": "Display Attempts",
+			"inputType": "Checkbox",
+			"validators": [],
+			"help": "Display the number of attempts remaining?"
+		},
+		"_recordInteraction": {
+			"type": "boolean",
+			"required": false,
+			"default": true,
+			"title": "Record interaction",
+			"inputType": "Checkbox",
+			"validators": [],
+			"help": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only."
+		},
+		"_questionWeight": {
+			"type": "number",
+			"required": false,
+			"default": 1,
+			"title": "Question Weight",
+			"inputType": "Number",
+			"validators": [
+				"number"
+			],
+			"help": "How much this question is worth"
+		},
+		"_feedback": {
+			"type": "object",
+			"required": false,
+			"title": "Feedback",
+			"properties": {
+				"title": {
+					"type": "string",
+					"required": false,
+					"default": "",
+					"title": "Feedback Title",
+					"inputType": "Text",
+					"validators": [],
+					"help": "Leave blank to have the component's title shown instead.",
+					"translatable": true
+				},
+				"notFinal": {
+					"type": "string",
+					"required": false,
+					"default": "",
+					"title": "Incorrect Not Final",
+					"inputType": "TextArea",
+					"validators": [],
+					"help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
+					"translatable": true
+				}
+			}
+		},
+		"_buttons": {
+			"type": "object",
+			"title": "Buttons",
+			"required": false,
+			"properties": {
+				"_submit": {
+					"type": "object",
+					"title": "Submit",
+					"properties": {
+						"buttonText": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Button label text for the submit button",
+							"translatable": true
+						},
+						"ariaLabel": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Aria label for the submit button",
+							"translatable": true
+						}
+					}
+				},
+				"_reset": {
+					"type": "object",
+					"title": "Reset",
+					"properties": {
+						"buttonText": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Button label text for the reset button",
+							"translatable": true
+						},
+						"ariaLabel": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Aria label for the reset button",
+							"translatable": true
+						}
+					}
+				},
+				"_showCorrectAnswer": {
+					"type": "object",
+					"title": "Show Correct Answer",
+					"properties": {
+						"buttonText": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Button label text to show the model answer",
+							"translatable": true
+						},
+						"ariaLabel": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Aria label for the show model answer button",
+							"translatable": true
+						}
+					}
+				},
+				"_hideCorrectAnswer": {
+					"type": "object",
+					"title": "Hide Correct Answer",
+					"properties": {
+						"buttonText": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Button label text to hide the model answer",
+							"translatable": true
+						},
+						"ariaLabel": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Aria label for the hide model answer button",
+							"translatable": true
+						}
+					}
+				},
+				"_showFeedback": {
+					"type": "object",
+					"title": "Show Feedback",
+					"properties": {
+						"buttonText": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Button label text to show feedback",
+							"translatable": true
+						},
+						"ariaLabel": {
+							"type": "string",
+							"required": false,
+							"default": "",
+							"title": "",
+							"inputType": "QuestionButton",
+							"validators": [],
+							"help": "Aria label for the show feedback button",
+							"translatable": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"globals": {
+		"ariaRegion": {
+			"type": "string",
+			"required": true,
+			"default": "Click on either picture to submit your choice.",
+			"inputType": "Text",
+			"validators": [],
+			"translatable": true
+		}
+	}
 }
