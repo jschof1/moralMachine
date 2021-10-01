@@ -2,11 +2,50 @@ define([
   "core/js/adapt",
   "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
 ], function (Adapt, Mcq) {
+  let userAnswers = [
+    {
+      "age-preference": {
+        "Save young": 0,
+        "Save old": 0,
+      },
+      "saving-more-lives": {
+        "Save less people": 0,
+        "Save more people": 0,
+      },
+      "gender-preference": {
+        Men: 0,
+        Woman: 0,
+      },
+      "protecting-passengers": {
+        "Save people in car": 0,
+        "Save pedestrians": 0,
+      },
+      "species-preference": {
+        "Save humans": 0,
+        "Save animals": 0,
+      },
+      "upholding-the-law": {
+        "Uphold Law": 0,
+        "Disobey Law": 0,
+      },
+      "social-value-preference": {
+        authority: 0,
+        crime: 0,
+      },
+      "avoiding-intervention": {
+        Intervene: 0,
+        "Avoid Intervention": 0,
+      },
+      "general-preference": {
+        "Most saved": "",
+        "Most Killed": "",
+      },
+    },
+  ];
   var moralMachine = Mcq.view.extend(
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
-        this.resetUserAnswerObj()
         this.storeCollectiveData();
         this.storeUserAnswer();
         this.restoreUserAnswer();
@@ -18,29 +57,30 @@ define([
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
 
-      resetUserAnswerObj: function () {
-        let answers = this.model.get('userAnswers')[0]
-           for (let key in answers) {
-             answers[key] = 0;
-         }
-       },
-
       restoreUserAnswer: function () {
         let _items = this.model.get("_items"),
           imgLeft = $(".left-img"),
           imgRight = $(".right-img"),
           descLeft = $(".left-text"),
           descRight = $(".right-text"),
-          userAnswers = this.model.get("_userAnswer")[0]
-          answer = this.model.get('userAnswers')
-          count = 0;
-        if ((!(number > _items.length - 1))) {
+          // userAnswers[0] = this.model.get("_userAnswer")[0]
+          answer = userAnswers[0];
+        count = 0;
+        if (!(count > _items.length - 1)) {
           descLeft.text(_items[count]["scenario-left"]["description"]);
           descRight.text(_items[count]["scenario-left"]["description"]);
           imgLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
           imgRight.attr("src", _items[count]["scenario-right"]["_graphic"]);
-          answer = userAnswers
+          answer = userAnswers[0];
         } else {
+          //set results to database
+          this.model.set("_isComplete", true);
+          for (let key in userAnswers[0]) {
+            for (let key2 in userAnswers[0][key]) {
+              console.log(key2);
+              userAnswers[0][key][key2] = 0;
+            }
+          }
           let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
 
           imgLeft.attr("src", overImg).css("border", "5px solid grey");
@@ -78,58 +118,51 @@ define([
       storeCollectiveData: function () {
         let _items = this.model.get("_items"),
           count = 0;
-  
-        (userAnswers = this.model.get('userAnswers')[0]),
-          ($submitBtn = $(
-            ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
-          )),
+
+        ($submitBtn = $(
+          ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
+        )),
           ($inputs = $(".moralMachine__item-input")),
           ($labels = $(".moralMachine__item-label"));
 
-        function KSShortener(side, value) {
-          let length = _items[count][`scenario-${side}`][`${value} characters`].length;
-          let arr = []
-          for (let i = 0; i < length; i++) {
-          let num = _items[count][`scenario-${side}`][`${value} characters`][i]['number'];
-          let character = _items[count][`scenario-${side}`][`${value} characters`][i]['character'];
-          arr.push({ [character] : num });
-        }
-          let sum = arr.reduce((acc, cur) => {
-            for (let key in cur) {
-              acc[key] = (acc[key] || 0) + cur[key];
-            }
-            return acc;
-          }, {});
-          let unique = Object.keys(sum).map(key => ({ [key]: sum[key] }));  
-          unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0])
-          let final = unique.slice(0, 2)
-          userAnswers["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
-          userAnswers["general-preference"]["Most saved"] = Object.keys(final[0])[0]
-          console.log(userAnswers)
-      }
-       
+        //CALC MOST KILLED & MOST SAVED WORK IN PROGRESS
+        //   function KSShortener(side, value) {
+        //     let length = _items[count][`scenario-${side}`][`${value} characters`].length;
+        //     let arr = []
+        //     for (let i = 0; i < length; i++) {
+        //     let num = _items[count][`scenario-${side}`][`${value} characters`][i]['number'];
+        //     let character = _items[count][`scenario-${side}`][`${value} characters`][i]['character'];
+        //     arr.push({ [character] : num });
+        //   }
+        //     let sum = arr.reduce((acc, cur) => {
+        //       for (let key in cur) {
+        //         acc[key] = (acc[key] || 0) + cur[key];
+        //       }
+        //       return acc;
+        //     }, {});
+        //     let unique = Object.keys(sum).map(key => ({ [key]: sum[key] }));
+        //     unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0])
+        //     let final = unique.slice(0, 2)
+        //     userAnswers[0]["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
+        //     userAnswers[0]["general-preference"]["Most saved"] = Object.keys(final[0])[0]
+        //     console.log(userAnswers[0])
+        // }
 
-      // KSShortener("left", "killed");
-      // KSShortener("right", "killed");
-      // KSShortener("left", "saved");
-      // KSShortener("right", "saved");
-
-
-      // let check =_items[count][`scenario-left`][`killed characters`]
-      // console.log(check.forEach((x) => {
-      //   count[x] = (counts[x] || 0) + 1;
-      // }))
+        // KSShortener("left", "killed");
+        // KSShortener("right", "killed");
+        // KSShortener("left", "saved");
+        // KSShortener("right", "saved");
 
         function getScoreLeft(count) {
           let LLength = _items[count]["scenario-left"]["scoring"].length;
           for (let i = 0; i < LLength; i++) {
-          return _items[count]["scenario-left"]["scoring"][i]["choices"];
+            return _items[count]["scenario-left"]["scoring"][i]["choices"];
           }
         }
         function getScoreRight(count) {
           let RLength = _items[count]["scenario-right"]["scoring"].length;
           for (let i = 0; i < RLength; i++) {
-          return _items[count]["scenario-right"]["scoring"][i]["choices"];
+            return _items[count]["scenario-right"]["scoring"][i]["choices"];
           }
         }
 
@@ -138,63 +171,63 @@ define([
           array.map((v) => {
             switch (v) {
               case "Save old": {
-                userAnswers["age-preference"]["Save old"]++;
+                userAnswers[0]["age-preference"]["Save old"]++;
                 break;
               }
               case "Save young": {
-                userAnswers["age-preference"]["Save young"]++;
+                userAnswers[0]["age-preference"]["Save young"]++;
                 break;
               }
               case "Save less people": {
-                userAnswers["saving-more-lives"]["Save less people"]++;
+                userAnswers[0]["saving-more-lives"]["Save less people"]++;
                 break;
               }
               case "Save more people": {
-                userAnswers["saving-more-lives"]["Save more people"]++;
+                userAnswers[0]["saving-more-lives"]["Save more people"]++;
                 break;
               }
               case "Men": {
-                userAnswers["gender-preference"].Men++;
+                userAnswers[0]["gender-preference"].Men++;
                 break;
               }
               case "Woman": {
-                userAnswers["gender-preference"].Woman++;
+                userAnswers[0]["gender-preference"].Woman++;
                 break;
               }
               case "Save pedestrians": {
-                userAnswers["protecting-passengers"]["Save pedestrians"]++;
+                userAnswers[0]["protecting-passengers"]["Save pedestrians"]++;
                 break;
               }
               case "Save people in car": {
-                userAnswers["protecting-passengers"]["Save people in car"]++;
+                userAnswers[0]["protecting-passengers"]["Save people in car"]++;
                 break;
               }
               case "Save pedestrians": {
-                userAnswers["species-preference"]["Save animals"]++;
+                userAnswers[0]["species-preference"]["Save animals"]++;
                 break;
               }
               case "Disobey Law": {
-                userAnswers["upholding-the-law"]["Disobey Law"]++;
+                userAnswers[0]["upholding-the-law"]["Disobey Law"]++;
                 break;
               }
               case "Uphold Law": {
-                userAnswers["upholding-the-law"]["Uphold Law"]++;
+                userAnswers[0]["upholding-the-law"]["Uphold Law"]++;
                 break;
               }
               case "authority": {
-                userAnswers["social-value-preference"].authority++;
+                userAnswers[0]["social-value-preference"].authority++;
                 break;
               }
               case "crime": {
-                userAnswers["social-value-preference"].crime++;
+                userAnswers[0]["social-value-preference"].crime++;
                 break;
               }
               case "Intervene": {
-                userAnswers["avoiding-intervention"]["Intervene"]++;
+                userAnswers[0]["avoiding-intervention"]["Intervene"]++;
                 break;
               }
               case "Avoid Intervention": {
-                userAnswers["avoiding-intervention"]["Avoid Intervention"]++;
+                userAnswers[0]["avoiding-intervention"]["Avoid Intervention"]++;
                 break;
               }
             }
@@ -238,9 +271,9 @@ define([
           $inputs.map((i, e) => {
             if (e != undefined)
               if (e.checked === true) {
-                i === 0 
-                ? pushData(getScoreLeft(count))
-                : pushData(getScoreRight(count));
+                i === 0
+                  ? pushData(getScoreLeft(count))
+                  : pushData(getScoreRight(count));
 
                 $submitBtn.prop("disabled", true);
                 $labels
@@ -258,7 +291,7 @@ define([
                 });
                 document.dispatchEvent(resetInputs);
               }
-              userAnswers
+            userAnswers[0];
           });
         }
         function updateInput() {
@@ -287,47 +320,39 @@ define([
           }, 1);
         });
         $submitBtn.on("click", (e) => {
-          submitChoice()
+          submitChoice();
           setTimeout(() => {
-            e.target.innerText = "SUBMIT BUTTON"
-            if(count <= _items.length -1) {
-              this.attributes._isEnabled = true
+            e.target.innerText = "SUBMIT BUTTON";
+            if (count <= _items.length - 1) {
+              this.attributes._isEnabled = true;
             } else {
-              this.attributes._isEnabled = false
-              $submitBtn.text("Test finished")
-              for(let i = 0; i < $inputs.length; i++) {
-                let $input = $inputs.filter('[data-adapt-index="' + i + '"]')
-                let $label = $labels.filter('[data-adapt-index="' + i + '"]')
-                $input.prop('disabled', true);
-                $label.toggleClass('is-disabled', true);
+              this.attributes._isEnabled = false;
+              $submitBtn.text("Test finished");
+              for (let i = 0; i < $inputs.length; i++) {
+                let $input = $inputs.filter('[data-adapt-index="' + i + '"]');
+                let $label = $labels.filter('[data-adapt-index="' + i + '"]');
+                $input.prop("disabled", true);
+                $label.toggleClass("is-disabled", true);
               }
             }
-          }, 1)
-        })
-        return userAnswers
+          }, 1);
+        });
+        return userAnswers[0]
       },
 
-      // getTheValues: function() {
-      //   console.log(this.storeCollectiveData())
-      //   return this.storeCollectiveData()
-      // },
-
       storeUserAnswer: function () {
-        let answers
-        let final
+        let answers;
+        let final;
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
         $submitBtn.on("click", (e) => {
-        answers = this.model.get('userAnswers')
-        final = this.model.set("_userAnswer", answers);
-        console.log(this.model.get('_userAnswer'))
+          answers = userAnswers[0];
+          final = this.model.set("_userAnswer", answers);
+          console.log(this.model.get("_userAnswer"));
         });
-        return final
+        return final;
       },
-      resetStoredUserAnswer: function () {
-        this.model.set("_userAnswer", []);
-        },
       setAttemptSpecificFeedback: function () {
         return false;
       },
@@ -340,8 +365,6 @@ define([
   return Adapt.register("moralMachine", {
     view: moralMachine,
 
-    model: Mcq.model.extend({
-
-    }),
+    model: Mcq.model.extend({}),
   });
 });
