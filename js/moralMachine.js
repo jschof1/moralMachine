@@ -117,6 +117,7 @@ define([
       },
       storeCollectiveData: function () {
         let _items = this.model.get("_items"),
+            data = [],
             count = 0;
 
         ($submitBtn = $(
@@ -152,6 +153,16 @@ define([
         // KSShortener("right", "killed");
         // KSShortener("left", "saved");
         // KSShortener("right", "saved");
+
+        onItemSelect = function(event) {
+          console.log("onItemSelect")
+        }
+
+        data = flatten(data)
+        
+        function flatten(input) {
+          return input.reduce((a, b) => a.concat(b), []);
+        }
 
         function getScoreLeft(count) {
           let LLength = _items[count]["scenario-left"]["scoring"].length;
@@ -290,7 +301,6 @@ define([
                 });
                 document.dispatchEvent(resetInputs);
               }
-            userAnswers[0];
           });
         }
         function updateInput() {
@@ -322,7 +332,7 @@ define([
           submitChoice();
           setTimeout(() => {
             e.target.innerText = "SUBMIT BUTTON";
-            if (count <= _items.length - 1) {
+            if (count <= _items.length -1) {
               this.attributes._isEnabled = true;
             } else {
               this.attributes._isEnabled = false;
@@ -336,7 +346,6 @@ define([
             }
           }, 1);
         });
-        return userAnswers[0]
       },
 
       storeUserAnswer: function () {
