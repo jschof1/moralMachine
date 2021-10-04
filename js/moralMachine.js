@@ -94,7 +94,7 @@ define([
         }
       },
 
-      resizeImage: function (width) {
+    resizeImage: function (width) {
         var imageWidth = width === "medium" ? "small" : width;
 
         this.$(".js-item-label").each(function (index) {
