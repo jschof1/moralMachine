@@ -33,7 +33,7 @@ define([
         crime: 0,
       },
       "avoiding-intervention": {
-        Intervene: 0,
+        "Intervene": 0,
         "Avoid Intervention": 0,
       },
       "general-preference": {
@@ -64,7 +64,7 @@ define([
           descLeft = $(".left-text"),
           descRight = $(".right-text"),
           // userAnswers[0] = this.model.get("_userAnswer")[0]
-          answer = userAnswers[0];
+          answer
         count = 0;
         if (!(count > _items.length - 1)) {
           descLeft.text(_items[count]["scenario-left"]["description"]);
@@ -74,7 +74,7 @@ define([
           answer = userAnswers[0];
         } else {
           //set results to database
-          this.model.set("_isComplete", true);
+          // this.model.set("_isComplete", true);
           for (let key in userAnswers[0]) {
             for (let key2 in userAnswers[0][key]) {
               console.log(key2);
@@ -117,7 +117,7 @@ define([
       },
       storeCollectiveData: function () {
         let _items = this.model.get("_items"),
-          count = 0;
+            count = 0;
 
         ($submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
@@ -244,21 +244,19 @@ define([
             let descRight = this.$(".right-text");
 
             descRight.text(_items[count + 1]["scenario-right"]["description"]);
-
             descLeft.text(_items[count + 1]["scenario-left"]["description"]);
+
             imgLeft.attr("src", _items[count + 1]["scenario-left"]["_graphic"]);
-            imgRight.attr(
-              "src",
-              _items[count + 1]["scenario-right"]["_graphic"]
+            imgRight.attr("src", _items[count + 1]["scenario-right"]["_graphic"]
             );
           } else {
             $(".moralMachine__button").hide();
             $(".moralMachine__item-option").hide();
-            let imgLeft = this.$(".left-img");
-            let imgRight = this.$(".right-img");
-            let descLeft = this.$(".left-text");
-            let descRight = this.$(".right-text");
-            let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
+            imgLeft = this.$(".left-img");
+            imgRight = this.$(".right-img");
+            descLeft = this.$(".left-text");
+            descRight = this.$(".right-text");
+            overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
 
             imgLeft.attr("src", overImg).css("border", "5px solid grey");
             imgRight.attr("src", overImg).css("border", "5px solid grey");
@@ -271,9 +269,10 @@ define([
           $inputs.map((i, e) => {
             if (e != undefined)
               if (e.checked === true) {
-                i === 0
-                  ? pushData(getScoreLeft(count))
-                  : pushData(getScoreRight(count));
+                if (i === 0){
+                   pushData(getScoreLeft(count))
+                }
+                   else pushData(getScoreRight(count));
 
                 $submitBtn.prop("disabled", true);
                 $labels
