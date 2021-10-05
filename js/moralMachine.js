@@ -2,52 +2,54 @@ define([
   "core/js/adapt",
   "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
 ], function (Adapt, Mcq) {
-  let userAnswers = [
-    {
-      "age-preference": {
-        "Save young": 0,
-        "Save old": 0,
-      },
-      "saving-more-lives": {
-        "Save less people": 0,
-        "Save more people": 0,
-      },
-      "gender-preference": {
-        Men: 0,
-        Woman: 0,
-      },
-      "protecting-passengers": {
-        "Save people in car": 0,
-        "Save pedestrians": 0,
-      },
-      "species-preference": {
-        "Save humans": 0,
-        "Save animals": 0,
-      },
-      "upholding-the-law": {
-        "Uphold Law": 0,
-        "Disobey Law": 0,
-      },
-      "social-value-preference": {
-        authority: 0,
-        crime: 0,
-      },
-      "avoiding-intervention": {
-        "Intervene": 0,
-        "Avoid Intervention": 0,
-      },
-      "general-preference": {
-        "Most saved": "",
-        "Most Killed": "",
-      },
+  let userAnswers = {
+    "age-preference": {
+      "Save young": 0,
+      "Save old": 0,
     },
-  ];
+    "saving-more-lives": {
+      "Save less people": 0,
+      "Save more people": 0,
+    },
+    "gender-preference": {
+      Men: 0,
+      Woman: 0,
+    },
+    "protecting-passengers": {
+      "Save people in car": 0,
+      "Save pedestrians": 0,
+    },
+    "species-preference": {
+      "Save humans": 0,
+      "Save animals": 0,
+    },
+    "upholding-the-law": {
+      "Uphold Law": 0,
+      "Disobey Law": 0,
+    },
+    "social-value-preference": {
+      authority: 0,
+      crime: 0,
+    },
+    "avoiding-intervention": {
+      Intervene: 0,
+      "Avoid Intervention": 0,
+    },
+    "general-preference": {
+      "Most saved": "",
+      "Most Killed": "",
+    },
+  };
+
+  let count = 0;
+
+  let data = [];
+
   var moralMachine = Mcq.view.extend(
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
         this.storeCollectiveData();
-        this.storeUserAnswer();
         this.restoreUserAnswer();
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
@@ -59,28 +61,22 @@ define([
 
       restoreUserAnswer: function () {
         let _items = this.model.get("_items"),
-          imgLeft = $(".left-img"),
-          imgRight = $(".right-img"),
-          descLeft = $(".left-text"),
-          descRight = $(".right-text"),
-          // userAnswers[0] = this.model.get("_userAnswer")[0]
-          answer
-        count = 0;
-        if (!(count > _items.length - 1)) {
-          descLeft.text(_items[count]["scenario-left"]["description"]);
-          descRight.text(_items[count]["scenario-left"]["description"]);
-          imgLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
-          imgRight.attr("src", _items[count]["scenario-right"]["_graphic"]);
-          answer = userAnswers[0];
-        } else {
-          //set results to database
-          // this.model.set("_isComplete", true);
-          for (let key in userAnswers[0]) {
-            for (let key2 in userAnswers[0][key]) {
-              console.log(key2);
-              userAnswers[0][key][key2] = 0;
-            }
-          }
+            imgLeft = $(".left-img"),
+            imgRight = $(".right-img"),
+            descLeft = $(".left-text"),
+            descRight = $(".right-text"),
+            outputScore = this.storeUserAnswer().data;
+            userPosition = this.storeUserAnswer().count;
+
+        if (userPosition == _items.length) {
+          this.model.set("_isComplete", true);
+          // for (let key in userAnswers) {
+          //   for (let key2 in userAnswers[key]) {
+          //     console.log(key2);
+          //     userAnswers[key][key2] = 0;
+          //   }
+          // }
+          data = []
           let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
 
           imgLeft.attr("src", overImg).css("border", "5px solid grey");
@@ -89,12 +85,17 @@ define([
           descRight.text("No more scenarios left");
           descLeft.text("No more scenarios left");
 
-          $(".moralMachine__button").hide();
-          $(".moralMachine__item-option").hide();
         }
-      },
+         else {
+          outputScore
+          descLeft.text(_items[userPosition]["scenario-left"]["description"]);
+          descRight.text(_items[userPosition]["scenario-left"]["description"]);
+          imgLeft.attr("src", _items[userPosition]["scenario-left"]["_graphic"]);
+          imgRight.attr("src", _items[userPosition]["scenario-right"]["_graphic"]);
+          }
+        },
 
-    resizeImage: function (width) {
+      resizeImage: function (width) {
         var imageWidth = width === "medium" ? "small" : width;
 
         this.$(".js-item-label").each(function (index) {
@@ -116,14 +117,13 @@ define([
         );
       },
       storeCollectiveData: function () {
-        let _items = this.model.get("_items"),
-            data = [],
-            count = 0;
+        let _items = this.model.get("_items");
 
-        ($submitBtn = $(
+        $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
-        )),
-          ($inputs = $(".moralMachine__item-input")),
+        );
+
+        ($inputs = $(".moralMachine__item-input")),
           ($labels = $(".moralMachine__item-label"));
 
         //CALC MOST KILLED & MOST SAVED WORK IN PROGRESS
@@ -144,9 +144,9 @@ define([
         //     let unique = Object.keys(sum).map(key => ({ [key]: sum[key] }));
         //     unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0])
         //     let final = unique.slice(0, 2)
-        //     userAnswers[0]["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
-        //     userAnswers[0]["general-preference"]["Most saved"] = Object.keys(final[0])[0]
-        //     console.log(userAnswers[0])
+        //     userAnswers["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
+        //     userAnswers["general-preference"]["Most saved"] = Object.keys(final[0])[0]
+        //     console.log(userAnswers)
         // }
 
         // KSShortener("left", "killed");
@@ -154,12 +154,12 @@ define([
         // KSShortener("left", "saved");
         // KSShortener("right", "saved");
 
-        onItemSelect = function(event) {
-          console.log("onItemSelect")
-        }
+        onItemSelect = function (event) {
+          console.log("onItemSelect");
+        };
 
-        data = flatten(data)
-        
+        data = flatten(data);
+
         function flatten(input) {
           return input.reduce((a, b) => a.concat(b), []);
         }
@@ -176,75 +176,78 @@ define([
             return _items[count]["scenario-right"]["scoring"][i]["choices"];
           }
         }
-
         function pushData(choice) {
           let array = [].concat(choice);
           array.map((v) => {
             switch (v) {
               case "Save old": {
-                userAnswers[0]["age-preference"]["Save old"]++;
+                userAnswers["age-preference"]["Save old"]++;
                 break;
               }
               case "Save young": {
-                userAnswers[0]["age-preference"]["Save young"]++;
+                userAnswers["age-preference"]["Save young"]++;
                 break;
               }
               case "Save less people": {
-                userAnswers[0]["saving-more-lives"]["Save less people"]++;
+                userAnswers["saving-more-lives"]["Save less people"]++;
                 break;
               }
               case "Save more people": {
-                userAnswers[0]["saving-more-lives"]["Save more people"]++;
+                userAnswers["saving-more-lives"]["Save more people"]++;
                 break;
               }
               case "Men": {
-                userAnswers[0]["gender-preference"].Men++;
+                userAnswers["gender-preference"].Men++;
                 break;
               }
               case "Woman": {
-                userAnswers[0]["gender-preference"].Woman++;
+                userAnswers["gender-preference"].Woman++;
                 break;
               }
               case "Save pedestrians": {
-                userAnswers[0]["protecting-passengers"]["Save pedestrians"]++;
+                userAnswers["protecting-passengers"]["Save pedestrians"]++;
                 break;
               }
               case "Save people in car": {
-                userAnswers[0]["protecting-passengers"]["Save people in car"]++;
+                userAnswers["protecting-passengers"]["Save people in car"]++;
                 break;
               }
               case "Save pedestrians": {
-                userAnswers[0]["species-preference"]["Save animals"]++;
+                userAnswers["species-preference"]["Save animals"]++;
                 break;
               }
               case "Disobey Law": {
-                userAnswers[0]["upholding-the-law"]["Disobey Law"]++;
+                userAnswers["upholding-the-law"]["Disobey Law"]++;
                 break;
               }
               case "Uphold Law": {
-                userAnswers[0]["upholding-the-law"]["Uphold Law"]++;
+                userAnswers["upholding-the-law"]["Uphold Law"]++;
                 break;
               }
               case "authority": {
-                userAnswers[0]["social-value-preference"].authority++;
+                userAnswers["social-value-preference"].authority++;
                 break;
               }
               case "crime": {
-                userAnswers[0]["social-value-preference"].crime++;
+                userAnswers["social-value-preference"].crime++;
                 break;
               }
               case "Intervene": {
-                userAnswers[0]["avoiding-intervention"]["Intervene"]++;
+                userAnswers["avoiding-intervention"]["Intervene"]++;
                 break;
               }
               case "Avoid Intervention": {
-                userAnswers[0]["avoiding-intervention"]["Avoid Intervention"]++;
+                userAnswers["avoiding-intervention"]["Avoid Intervention"]++;
                 break;
               }
             }
           });
           newChoice();
           ++count;
+          data.push(choice);
+          data = flatten(data);
+          console.log(data);
+          console.log(count);
         }
 
         function newChoice(number = count + 1) {
@@ -258,7 +261,9 @@ define([
             descLeft.text(_items[count + 1]["scenario-left"]["description"]);
 
             imgLeft.attr("src", _items[count + 1]["scenario-left"]["_graphic"]);
-            imgRight.attr("src", _items[count + 1]["scenario-right"]["_graphic"]
+            imgRight.attr(
+              "src",
+              _items[count + 1]["scenario-right"]["_graphic"]
             );
           } else {
             $(".moralMachine__button").hide();
@@ -280,10 +285,9 @@ define([
           $inputs.map((i, e) => {
             if (e != undefined)
               if (e.checked === true) {
-                if (i === 0){
-                   pushData(getScoreLeft(count))
-                }
-                   else pushData(getScoreRight(count));
+                if (i === 0) {
+                  pushData(getScoreLeft(count));
+                } else pushData(getScoreRight(count));
 
                 $submitBtn.prop("disabled", true);
                 $labels
@@ -311,6 +315,7 @@ define([
             label.toggleClass("is-disabled", false);
 
             if (input[0].checked) {
+              console.log(input[0].checked);
               label.toggleClass("is-selected", true);
             } else {
               label.toggleClass("is-selected", false);
@@ -332,7 +337,7 @@ define([
           submitChoice();
           setTimeout(() => {
             e.target.innerText = "SUBMIT BUTTON";
-            if (count <= _items.length -1) {
+            if (count <= _items.length - 1) {
               this.attributes._isEnabled = true;
             } else {
               this.attributes._isEnabled = false;
@@ -346,20 +351,19 @@ define([
             }
           }, 1);
         });
+        return userAnswers;
       },
 
       storeUserAnswer: function () {
         let answers;
-        let final;
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
         $submitBtn.on("click", (e) => {
-          answers = userAnswers[0];
+          answers = data;
           final = this.model.set("_userAnswer", answers);
-          console.log(this.model.get("_userAnswer"));
         });
-        return final;
+        return { count, data };
       },
       setAttemptSpecificFeedback: function () {
         return false;
