@@ -2,6 +2,7 @@ define([
   "core/js/adapt",
   "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
 ], function (Adapt, Mcq) {
+
   let userAnswers = {
     "age-preference": {
       "Save young": 0,
@@ -45,12 +46,30 @@ define([
 
   let data = [];
 
+  let options = {
+    "Avoid Intervention":  38780,
+    "Save people in car": 98202,
+    "Save old": 89237,
+    "Save young": 42374,
+    "Save more people": 19273,
+    "Save humans": 50283,
+    "Save pets": 33495,
+    "Save professionals": 77231,
+    "Save robbers": 66842,
+    "Uphold law": 12079
+  };
+
+    let counts = []
+
+    let userCounts
+
   var moralMachine = Mcq.view.extend(
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
         this.storeCollectiveData();
         this.restoreUserAnswer();
+        this.convert()
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
@@ -59,20 +78,47 @@ define([
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
 
+      convert: function () {
+        //get all indexes of array
+        var indexes = [];
+        for (var i = 0; i < options.length; i++) {
+          indexes.push(i);
+        }
+        // count duplicates of data clicked
+        // //console.log(counts)
+
+      data.forEach((x) => {
+        counts[x] = (counts[x] || 0) + 1;
+      });
+      //console.log(counts)
+
+      //assign random integer no larger than 5 digits to each array element
+      // for (var i = 0; i < options.length; i++) {
+      //   var random = Math.floor(Math.random() * 1000000);
+      //   while (random > 100000) {
+      //     random = Math.floor(Math.random() * 1000000);
+      //     counts[i] = random;
+      //   }
+      // }
+      // console.log(counts)
+
+      console.log(Object.keys(options))
+    },
+
       restoreUserAnswer: function () {
         let _items = this.model.get("_items"),
             imgLeft = $(".left-img"),
             imgRight = $(".right-img"),
             descLeft = $(".left-text"),
             descRight = $(".right-text"),
-            outputScore = this.storeUserAnswer().data;
+            outputScore = this.storeUserAnswer().userCounts;
             userPosition = this.storeUserAnswer().count;
 
         if (userPosition == _items.length) {
           this.model.set("_isComplete", true);
           // for (let key in userAnswers) {
           //   for (let key2 in userAnswers[key]) {
-          //     console.log(key2);
+          //     //console.log(key2);
           //     userAnswers[key][key2] = 0;
           //   }
           // }
@@ -88,6 +134,7 @@ define([
         }
          else {
           outputScore
+          console.log(outputScore)
           descLeft.text(_items[userPosition]["scenario-left"]["description"]);
           descRight.text(_items[userPosition]["scenario-left"]["description"]);
           imgLeft.attr("src", _items[userPosition]["scenario-left"]["_graphic"]);
@@ -122,7 +169,7 @@ define([
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
-
+          $feedback = $(".moralMachine__feedback:not(.is-full-width)").css("width", "100%");
         ($inputs = $(".moralMachine__item-input")),
           ($labels = $(".moralMachine__item-label"));
 
@@ -146,7 +193,7 @@ define([
         //     let final = unique.slice(0, 2)
         //     userAnswers["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
         //     userAnswers["general-preference"]["Most saved"] = Object.keys(final[0])[0]
-        //     console.log(userAnswers)
+        //     //console.log(userAnswers)
         // }
 
         // KSShortener("left", "killed");
@@ -155,7 +202,7 @@ define([
         // KSShortener("right", "saved");
 
         onItemSelect = function (event) {
-          console.log("onItemSelect");
+          //console.log("onItemSelect");
         };
 
         data = flatten(data);
@@ -246,8 +293,13 @@ define([
           ++count;
           data.push(choice);
           data = flatten(data);
-          console.log(data);
-          console.log(count);
+          //console.log(data);
+          //console.log(count);
+          data.forEach((x) => {
+            counts[x] = (counts[x] || 0) + 1;
+          });
+          userCounts = Object.values(counts);
+          
         }
 
         function newChoice(number = count + 1) {
@@ -315,7 +367,7 @@ define([
             label.toggleClass("is-disabled", false);
 
             if (input[0].checked) {
-              console.log(input[0].checked);
+              //console.log(input[0].checked);
               label.toggleClass("is-selected", true);
             } else {
               label.toggleClass("is-selected", false);
@@ -330,7 +382,7 @@ define([
               Adapt.a11y.toggleEnabled($submitBtn, true);
               $submitBtn.text("SUBMIT BUTTON");
               updateInput();
-            } else $submitBtn.text("Test finished");
+            } else $submitBtn.hide() 
           }, 1);
         });
         $submitBtn.on("click", (e) => {
@@ -341,7 +393,8 @@ define([
               this.attributes._isEnabled = true;
             } else {
               this.attributes._isEnabled = false;
-              $submitBtn.text("Test finished");
+              $submitBtn.hide() 
+              // $(".btn__feedback:not(.is-full-width").css("width", "100% !important")
               for (let i = 0; i < $inputs.length; i++) {
                 let $input = $inputs.filter('[data-adapt-index="' + i + '"]');
                 let $label = $labels.filter('[data-adapt-index="' + i + '"]');
@@ -355,15 +408,16 @@ define([
       },
 
       storeUserAnswer: function () {
+        
         let answers;
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
         $submitBtn.on("click", (e) => {
-          answers = data;
+          answers = userCounts;
           final = this.model.set("_userAnswer", answers);
         });
-        return { count, data };
+        return { count, userCounts };
       },
       setAttemptSpecificFeedback: function () {
         return false;
