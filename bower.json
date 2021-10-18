@@ -21,7 +21,7 @@
     "test",
     "tests"
   ],
-    "version": "0.3.7.6",
+    "version": "0.3.7.7",
     "framework": ">=5.0",
     "component": "moralMachine",
     "displayName": "Moral Machine"
