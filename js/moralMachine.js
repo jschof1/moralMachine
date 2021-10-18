@@ -46,8 +46,10 @@ define([
 
   let data = [];
 
+  let userCounts = {};
+
   let options = {
-    "Avoid Intervention":  38780,
+    "Avoid Intervention": 38780,
     "Save people in car": 98202,
     "Save old": 89237,
     "Save young": 42374,
@@ -56,12 +58,25 @@ define([
     "Save pets": 33495,
     "Save professionals": 77231,
     "Save robbers": 66842,
-    "Uphold law": 12079
+    "Uphold law": 12079,
   };
+  let counts = [];
+  let newOptions;
 
-    let counts = []
+  setTimeout(() => {
+    console.log(
+      "THIS STATES THE USERS DECISIONS SO FAR:",
+      counts,
+      "THIS STATES WHAT SCENARIO THE USER IS ON:",
+      count,
+      "THIS STATES WHAT THE USERS CHOICES WITHOUT THE NUMBERS",
+      data,
+      "THIS IS THE STORAGE COMPATIBLE VERSION - PLEASE SEE OPTIONS TO FIND ASSIGNED ID",
+      newOptions
+    );
+  }, 5000);
 
-    let userCounts
+
 
   var moralMachine = Mcq.view.extend(
     {
@@ -69,7 +84,6 @@ define([
         Mcq.view.prototype.setupQuestion.call(this);
         this.storeCollectiveData();
         this.restoreUserAnswer();
-        this.convert()
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
@@ -78,69 +92,39 @@ define([
         Adapt.a11y.toggleEnabled($buttonsAction, false);
       },
 
-      convert: function () {
-        //get all indexes of array
-        var indexes = [];
-        for (var i = 0; i < options.length; i++) {
-          indexes.push(i);
-        }
-        // count duplicates of data clicked
-        // //console.log(counts)
-
-      data.forEach((x) => {
-        counts[x] = (counts[x] || 0) + 1;
-      });
-      //console.log(counts)
-
-      //assign random integer no larger than 5 digits to each array element
-      // for (var i = 0; i < options.length; i++) {
-      //   var random = Math.floor(Math.random() * 1000000);
-      //   while (random > 100000) {
-      //     random = Math.floor(Math.random() * 1000000);
-      //     counts[i] = random;
-      //   }
-      // }
-      // console.log(counts)
-
-      console.log(Object.keys(options))
-    },
-
       restoreUserAnswer: function () {
-        let _items = this.model.get("_items"),
-            imgLeft = $(".left-img"),
-            imgRight = $(".right-img"),
-            descLeft = $(".left-text"),
-            descRight = $(".right-text"),
-            outputScore = this.storeUserAnswer().userCounts;
-            userPosition = this.storeUserAnswer().count;
+        
+        let _items = this.model.get("_items")
 
-        if (userPosition == _items.length) {
+        let imgLeft = this.$(".left-img");
+        let imgRight = this.$(".right-img");
+        let descLeft = this.$(".left-text");
+        let descRight = this.$(".right-text");
+
+        // this.storeUserAnswer();
+        if (count >= _items.length) {
           this.model.set("_isComplete", true);
-          // for (let key in userAnswers) {
-          //   for (let key2 in userAnswers[key]) {
-          //     //console.log(key2);
-          //     userAnswers[key][key2] = 0;
-          //   }
-          // }
-          data = []
-          let overImg = "https://i.ibb.co/cbzXbpr/game-over.png";
+          data = [];
+          count = 0;
+
+          $("button").hide();
+          $(".moralMachine__item-option").hide();
+
+          overImg = "https://i.ibb.co/tMFWfvq/choices-made.png";
 
           imgLeft.attr("src", overImg).css("border", "5px solid grey");
           imgRight.attr("src", overImg).css("border", "5px solid grey");
 
-          descRight.text("No more scenarios left");
-          descLeft.text("No more scenarios left");
-
+          descRight.text("Decision(s) made");
+          descLeft.text("Decisions(s) made");
+        } else {
+          userCounts;
+          descLeft.text(_items[count]["scenario-left"]["description"]);
+          descRight.text(_items[count]["scenario-left"]["description"]);
+          imgLeft.attr("src", _items[count]["scenario-left"]["_graphic"]);
+          imgRight.attr("src", _items[count]["scenario-right"]["_graphic"]);
         }
-         else {
-          outputScore
-          console.log(outputScore)
-          descLeft.text(_items[userPosition]["scenario-left"]["description"]);
-          descRight.text(_items[userPosition]["scenario-left"]["description"]);
-          imgLeft.attr("src", _items[userPosition]["scenario-left"]["_graphic"]);
-          imgRight.attr("src", _items[userPosition]["scenario-right"]["_graphic"]);
-          }
-        },
+      },
 
       resizeImage: function (width) {
         var imageWidth = width === "medium" ? "small" : width;
@@ -169,37 +153,54 @@ define([
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
-          $feedback = $(".moralMachine__feedback:not(.is-full-width)").css("width", "100%");
+        $feedback = $(".moralMachine__feedback:not(.is-full-width)").css(
+          "width",
+          "100%"
+        );
         ($inputs = $(".moralMachine__item-input")),
           ($labels = $(".moralMachine__item-label"));
 
-        //CALC MOST KILLED & MOST SAVED WORK IN PROGRESS
-        //   function KSShortener(side, value) {
-        //     let length = _items[count][`scenario-${side}`][`${value} characters`].length;
-        //     let arr = []
-        //     for (let i = 0; i < length; i++) {
-        //     let num = _items[count][`scenario-${side}`][`${value} characters`][i]['number'];
-        //     let character = _items[count][`scenario-${side}`][`${value} characters`][i]['character'];
-        //     arr.push({ [character] : num });
-        //   }
-        //     let sum = arr.reduce((acc, cur) => {
-        //       for (let key in cur) {
-        //         acc[key] = (acc[key] || 0) + cur[key];
-        //       }
-        //       return acc;
-        //     }, {});
-        //     let unique = Object.keys(sum).map(key => ({ [key]: sum[key] }));
-        //     unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0])
-        //     let final = unique.slice(0, 2)
-        //     userAnswers["general-preference"]["Most Killed"] = Object.keys(final[0])[0]
-        //     userAnswers["general-preference"]["Most saved"] = Object.keys(final[0])[0]
-        //     //console.log(userAnswers)
-        // }
+        // CALC MOST KILLED & MOST SAVED WORK IN PROGRESS
+        function KSShortener(side, value) {
+          let length =
+            _items[count][`scenario-${side}`][`${value} characters`].length;
+          let arr = [];
+          for (let i = 0; i < length; i++) {
+            let num =
+              _items[count][`scenario-${side}`][`${value} characters`][i][
+                "number"
+              ];
+            let character =
+              _items[count][`scenario-${side}`][`${value} characters`][i][
+                "character"
+              ];
+            arr.push({ [character]: num });
+          }
+          console.log(arr)
+          let sum = arr.reduce((acc, cur) => {
+            for (let key in cur) {
+              acc[key] = (acc[key] || 0) + cur[key];
+            }
+            return acc;
+          }, {});
+          console.log(sum);
 
-        // KSShortener("left", "killed");
-        // KSShortener("right", "killed");
-        // KSShortener("left", "saved");
-        // KSShortener("right", "saved");
+          let unique = Object.keys(sum).map((key) => ({ [key]: sum[key] }));
+          unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
+          let final = unique.slice(0, 2);
+          userAnswers["general-preference"]["Most Killed"] = Object.keys(
+            final[0]
+          )[0];
+          userAnswers["general-preference"]["Most saved"] = Object.keys(
+            final[0]
+          )[0];
+         console.log(final)
+        }
+
+        KSShortener("left", "killed");
+        KSShortener("right", "killed");
+        KSShortener("left", "saved");
+        KSShortener("right", "saved");
 
         onItemSelect = function (event) {
           //console.log("onItemSelect");
@@ -298,10 +299,20 @@ define([
           data.forEach((x) => {
             counts[x] = (counts[x] || 0) + 1;
           });
-          userCounts = Object.values(counts);
-          
-        }
+          let keys = Object.keys(options);
+          let countsKeys = Object.keys(counts);
+          let values = Object.values(options);
+          // if the keys match, create a new object with options value as key and count value as value
 
+          newOptions = keys.map((key, i) => {
+            if (countsKeys.includes(key)) {
+              //replace the countsKeys with optionsValues
+              return { [values[i]]: counts[key] };
+            } else {
+              return { [values[i]]: 0 };
+            }
+          });
+        }
         function newChoice(number = count + 1) {
           if (!(number > _items.length - 1)) {
             let imgLeft = this.$(".left-img");
@@ -382,7 +393,7 @@ define([
               Adapt.a11y.toggleEnabled($submitBtn, true);
               $submitBtn.text("SUBMIT BUTTON");
               updateInput();
-            } else $submitBtn.hide() 
+            } else $submitBtn.hide();
           }, 1);
         });
         $submitBtn.on("click", (e) => {
@@ -393,7 +404,7 @@ define([
               this.attributes._isEnabled = true;
             } else {
               this.attributes._isEnabled = false;
-              $submitBtn.hide() 
+              $submitBtn.hide();
               // $(".btn__feedback:not(.is-full-width").css("width", "100% !important")
               for (let i = 0; i < $inputs.length; i++) {
                 let $input = $inputs.filter('[data-adapt-index="' + i + '"]');
@@ -408,16 +419,27 @@ define([
       },
 
       storeUserAnswer: function () {
-        
+        let output;
         let answers;
+        let final;
+
+        let values;
+        let keys;
+        let conversion = [];
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
         $submitBtn.on("click", (e) => {
-          answers = userCounts;
-          final = this.model.set("_userAnswer", answers);
+          answers = newOptions;
+          for (let i of Object.keys(newOptions)) {
+            values = Object.values(answers[i]);
+            keys = Object.keys(answers[i]);
+            output = [parseInt(...keys), ...values];
+            conversion.push(...output);
+          }
+          final = this.model.set("_userAnswer", conversion);
         });
-        return { count, userCounts };
+        return final;
       },
       setAttemptSpecificFeedback: function () {
         return false;
