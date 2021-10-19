@@ -42,6 +42,7 @@ define([
     },
   };
 
+
   let count = 0;
 
   let data = [];
@@ -72,18 +73,34 @@ define([
       "THIS STATES WHAT THE USERS CHOICES WITHOUT THE NUMBERS",
       data,
       "THIS IS THE STORAGE COMPATIBLE VERSION - PLEASE SEE OPTIONS TO FIND ASSIGNED ID",
-      newOptions
+      newOptions,
+      'CHECK IF STATE CHANGES',
+      userAnswers
     );
   }, 5000);
+  let req = new XMLHttpRequest();
+        req.onreadystatechange = () => {
+          if (req.readyState == XMLHttpRequest.DONE) {
+            console.log(req.responseText);
+          }
+        };
+  req.onreadystatechange = () => {
+    if (req.readyState == XMLHttpRequest.DONE) {
+      console.log(req.responseText);
+    }
+  };
+  req.open("PUT", "https://api.jsonbin.io/v3/b/616d96659548541c29c4ef3a", true);
+  req.setRequestHeader("Content-Type", "application/json");
+  req.setRequestHeader("X-Master-Key", "$2b$10$5ztXybl/2Pyv29l65GVIwu/qowvI/dmRTjUvWR6sxkeBmj5IOGGhi");
 
-
-
+      setTimeout(() => { req.send(JSON.stringify(userAnswers))}, 5000)
   var moralMachine = Mcq.view.extend(
     {
       onQuestionRendered: function () {
         Mcq.view.prototype.setupQuestion.call(this);
         this.storeCollectiveData();
         this.restoreUserAnswer();
+        // this.apiUpdate();
         this.resizeImage(Adapt.device.screenSize);
         this.setUpColumns();
         this.$(".js-item-label").imageready(this.setReadyStatus.bind(this));
@@ -149,7 +166,7 @@ define([
       },
       storeCollectiveData: function () {
         let _items = this.model.get("_items");
-
+        console.log('coshema');
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
@@ -418,6 +435,30 @@ define([
         return userAnswers;
       },
 
+      // apiUpdate: function() {
+      //   let _items = this.model.get("_items")
+      //   console.log(_items.length)
+      //   let req = new XMLHttpRequest();
+      //   req.onreadystatechange = () => {
+      //     if (req.readyState == XMLHttpRequest.DONE) {
+      //       console.log(req.responseText);
+      //     }
+      //   };
+      //   let finishCount = 0
+      //   let $submitBtn = $(
+      //     ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
+      //   );
+      //   $submitBtn.on("click", (e) => {
+      //     ++finishCount;
+      //     console.log(finishCount)
+      //   })
+      //     if (finishCount == _items.length){
+      //   req.open("PUT", "https://api.jsonbin.io/v3/b/616d96659548541c29c4ef3a", true);
+      //   req.setRequestHeader("Content-Type", "application/json");
+      //   req.setRequestHeader("X-Master-Key", "$2b$10$5ztXybl/2Pyv29l65GVIwu/qowvI/dmRTjUvWR6sxkeBmj5IOGGhi");
+      //   setTimeout(() => { req.send(JSON.stringify(userAnswers))}, 5000)
+      //     }
+      // },
       storeUserAnswer: function () {
         let output;
         let answers;
