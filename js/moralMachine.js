@@ -3,6 +3,7 @@ define([
   "components/adapt-contrib-mcq/js/adapt-contrib-mcq",
 ], function (Adapt, Mcq) {
 
+
   let userAnswers = {
     "age-preference": {
       "Save young": 0,
@@ -42,6 +43,9 @@ define([
     },
   };
 
+  let dayData = {
+    ...userAnswers
+  }
 
   let count = 0;
 
@@ -75,9 +79,13 @@ define([
       "THIS IS THE STORAGE COMPATIBLE VERSION - PLEASE SEE OPTIONS TO FIND ASSIGNED ID",
       newOptions,
       'CHECK IF STATE CHANGES',
-      userAnswers
+      userAnswers,
+      'COUNTS FOR THE DAY',
+      dayData
     );
   }, 5000);
+
+console.log(dayData)
   let req = new XMLHttpRequest();
         req.onreadystatechange = () => {
           if (req.readyState == XMLHttpRequest.DONE) {
@@ -178,46 +186,46 @@ define([
           ($labels = $(".moralMachine__item-label"));
 
         // CALC MOST KILLED & MOST SAVED WORK IN PROGRESS
-        function KSShortener(side, value) {
-          let length =
-            _items[count][`scenario-${side}`][`${value} characters`].length;
-          let arr = [];
-          for (let i = 0; i < length; i++) {
-            let num =
-              _items[count][`scenario-${side}`][`${value} characters`][i][
-                "number"
-              ];
-            let character =
-              _items[count][`scenario-${side}`][`${value} characters`][i][
-                "character"
-              ];
-            arr.push({ [character]: num });
-          }
-          console.log(arr)
-          let sum = arr.reduce((acc, cur) => {
-            for (let key in cur) {
-              acc[key] = (acc[key] || 0) + cur[key];
-            }
-            return acc;
-          }, {});
-          console.log(sum);
+        // function KSShortener(side, value) {
+        //   let length =
+        //     _items[count][`scenario-${side}`][`${value} characters`].length;
+        //   let arr = [];
+        //   for (let i = 0; i < length; i++) {
+        //     let num =
+        //       _items[count][`scenario-${side}`][`${value} characters`][i][
+        //         "number"
+        //       ];
+        //     let character =
+        //       _items[count][`scenario-${side}`][`${value} characters`][i][
+        //         "character"
+        //       ];
+        //     arr.push({ [character]: num });
+        //   }
+        //   console.log(arr)
+        //   let sum = arr.reduce((acc, cur) => {
+        //     for (let key in cur) {
+        //       acc[key] = (acc[key] || 0) + cur[key];
+        //     }
+        //     return acc;
+        //   }, {});
+        //   console.log(sum);
 
-          let unique = Object.keys(sum).map((key) => ({ [key]: sum[key] }));
-          unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
-          let final = unique.slice(0, 2);
-          userAnswers["general-preference"]["Most Killed"] = Object.keys(
-            final[0]
-          )[0];
-          userAnswers["general-preference"]["Most saved"] = Object.keys(
-            final[0]
-          )[0];
-         console.log(final)
-        }
+        //   let unique = Object.keys(sum).map((key) => ({ [key]: sum[key] }));
+        //   unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
+        //   let final = unique.slice(0, 2);
+        //   userAnswers["general-preference"]["Most Killed"] = Object.keys(
+        //     final[0]
+        //   )[0];
+        //   userAnswers["general-preference"]["Most saved"] = Object.keys(
+        //     final[0]
+        //   )[0];
+        //  console.log(final)
+        // }
 
-        KSShortener("left", "killed");
-        KSShortener("right", "killed");
-        KSShortener("left", "saved");
-        KSShortener("right", "saved");
+        // KSShortener("left", "killed");
+        // KSShortener("right", "killed");
+        // KSShortener("left", "saved");
+        // KSShortener("right", "saved");
 
         onItemSelect = function (event) {
           //console.log("onItemSelect");
