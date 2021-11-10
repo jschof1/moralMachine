@@ -43,9 +43,9 @@ define([
     },
   };
 
-  let dayData = {
-    ...userAnswers
-  }
+  // let dayData = {
+  //   ...userAnswers
+  // }
 
   let count = 0;
 
@@ -65,36 +65,39 @@ define([
     "Save robbers": 66842,
     "Uphold law": 12079,
   };
-  let counts = [];
+  let counts = {};
   let newOptions;
+
+  console.log(Object.keys(counts));
 
   setTimeout(() => {
     console.log(
       "THIS STATES THE USERS DECISIONS SO FAR:",
       counts,
-      "THIS STATES WHAT SCENARIO THE USER IS ON:",
-      count,
-      "THIS STATES WHAT THE USERS CHOICES WITHOUT THE NUMBERS",
-      data,
-      "THIS IS THE STORAGE COMPATIBLE VERSION - PLEASE SEE OPTIONS TO FIND ASSIGNED ID",
-      newOptions,
-      'CHECK IF STATE CHANGES',
-      userAnswers,
-      'COUNTS FOR THE DAY',
-      dayData
+      data
+      // "THIS STATES WHAT SCENARIO THE USER IS ON:",
+      // count,
+      // "THIS STATES WHAT THE USERS CHOICES WITHOUT THE NUMBERS",
+      // data,
+      // "THIS IS THE STORAGE COMPATIBLE VERSION - PLEASE SEE OPTIONS TO FIND ASSIGNED ID",
+      // newOptions,
+      // 'CHECK IF STATE CHANGES',
+      // userAnswers,
+      // 'COUNTS FOR THE DAY',
+      // dayData
     );
   }, 5000);
 
-console.log(dayData)
+//console.log(dayData)
   let req = new XMLHttpRequest();
         req.onreadystatechange = () => {
           if (req.readyState == XMLHttpRequest.DONE) {
-            console.log(req.responseText);
+            //console.log(req.responseText);
           }
         };
   req.onreadystatechange = () => {
     if (req.readyState == XMLHttpRequest.DONE) {
-      console.log(req.responseText);
+      //console.log(req.responseText);
     }
   };
   req.open("PUT", "https://api.jsonbin.io/v3/b/616d96659548541c29c4ef3a", true);
@@ -174,7 +177,7 @@ console.log(dayData)
       },
       storeCollectiveData: function () {
         let _items = this.model.get("_items");
-        console.log('coshema');
+        //console.log('coshema');
         $submitBtn = $(
           ".moralMachine__inner > .btn__container > .btn__response-container > .btn__action"
         );
@@ -201,14 +204,14 @@ console.log(dayData)
         //       ];
         //     arr.push({ [character]: num });
         //   }
-        //   console.log(arr)
+        //   //console.log(arr)
         //   let sum = arr.reduce((acc, cur) => {
         //     for (let key in cur) {
         //       acc[key] = (acc[key] || 0) + cur[key];
         //     }
         //     return acc;
         //   }, {});
-        //   console.log(sum);
+        //   //console.log(sum);
 
         //   let unique = Object.keys(sum).map((key) => ({ [key]: sum[key] }));
         //   unique.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
@@ -219,7 +222,7 @@ console.log(dayData)
         //   userAnswers["general-preference"]["Most saved"] = Object.keys(
         //     final[0]
         //   )[0];
-        //  console.log(final)
+        //  //console.log(final)
         // }
 
         // KSShortener("left", "killed");
@@ -228,7 +231,7 @@ console.log(dayData)
         // KSShortener("right", "saved");
 
         onItemSelect = function (event) {
-          //console.log("onItemSelect");
+          ////console.log("onItemSelect");
         };
 
         data = flatten(data);
@@ -319,16 +322,17 @@ console.log(dayData)
           ++count;
           data.push(choice);
           data = flatten(data);
-          //console.log(data);
-          //console.log(count);
+          console.log(data);
+          console.log(counts);
           data.forEach((x) => {
             counts[x] = (counts[x] || 0) + 1;
           });
-          let keys = Object.keys(options);
-          let countsKeys = Object.keys(counts);
-          let values = Object.values(options);
-          // if the keys match, create a new object with options value as key and count value as value
 
+          let 
+            keys = Object.keys(options),
+            countsKeys = Object.keys(counts),
+            values = Object.values(options);
+          // if the keys match, create a new object with options value as key and count value as value
           newOptions = keys.map((key, i) => {
             if (countsKeys.includes(key)) {
               //replace the countsKeys with optionsValues
@@ -403,7 +407,7 @@ console.log(dayData)
             label.toggleClass("is-disabled", false);
 
             if (input[0].checked) {
-              //console.log(input[0].checked);
+              ////console.log(input[0].checked);
               label.toggleClass("is-selected", true);
             } else {
               label.toggleClass("is-selected", false);
@@ -440,16 +444,55 @@ console.log(dayData)
             }
           }, 1);
         });
+        // update window.localStorage with userAnswers
+        setTimeout(() => {
+          console.log(
+            "THIS STATES THE USERS DECISIONS SO FAR:",
+            counts,
+            // storage.getItem(counts)
+          );
+        }, 5000);
+        
+        let items = this.model.get('_items')
+
+        //collect max score length for each sde 
+        
+       let gameLength = items.length
+           
+
+       console.log(count)
+        
+
+        storage = window.localStorage
+        $submitBtn.on("click", (e) => {
+
+          // let arr = []
+          // arr.push(counts, count)
+          // console.log(arr)
+              if (count == items.length){
+                storage.setItem("ANSWERS", JSON.stringify(counts))
+                storage.setItem("count", JSON.stringify(count))
+                storage.setItem("amountEnd", JSON.stringify(gameLength))
+                    // console.log(count)
+                    // console.log(storage)
+                    // console.log(storage.getItem("ANSWERS"))
+                    // console.log(storage.getItem("amount"))
+              }
+              else {
+                window.localStorage.clear();
+              }
+        });
         return userAnswers;
       },
 
+      
       // apiUpdate: function() {
       //   let _items = this.model.get("_items")
-      //   console.log(_items.length)
+      //   //console.log(_items.length)
       //   let req = new XMLHttpRequest();
       //   req.onreadystatechange = () => {
       //     if (req.readyState == XMLHttpRequest.DONE) {
-      //       console.log(req.responseText);
+      //       //console.log(req.responseText);
       //     }
       //   };
       //   let finishCount = 0
@@ -458,7 +501,7 @@ console.log(dayData)
       //   );
       //   $submitBtn.on("click", (e) => {
       //     ++finishCount;
-      //     console.log(finishCount)
+      //     //console.log(finishCount)
       //   })
       //     if (finishCount == _items.length){
       //   req.open("PUT", "https://api.jsonbin.io/v3/b/616d96659548541c29c4ef3a", true);
